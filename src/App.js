@@ -17,6 +17,7 @@ function App() {
     <GlobalProvider>
       <div className="App">
         <Router>
+          {/* ajmoo :( */}
           <Switch>
             <Route path="/login" render={(props) => <Landing {...props} />} />
             <Route
