@@ -3,7 +3,7 @@ import "./App.css";
 
 import { useEffect } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   useHistory,
@@ -17,12 +17,8 @@ function App() {
     <GlobalProvider>
       <div className="App">
         <Router basename="">
-          {/* ajmoo :( */}
           <Switch>
-            <Route
-              path={`${process.env.REACT_APP_PUBLIC_URL}/login`}
-              render={(props) => <Landing {...props} />}
-            />
+            <Route path={"/login"} render={(props) => <Landing {...props} />} />
             <Route
               path="/course"
               exact
