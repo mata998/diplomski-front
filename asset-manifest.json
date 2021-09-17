@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/diplomski-front/static/css/main.907773be.chunk.css",
+    "main.js": "/diplomski-front/static/js/main.5512bfb0.chunk.js",
+    "main.js.map": "/diplomski-front/static/js/main.5512bfb0.chunk.js.map",
+    "runtime-main.js": "/diplomski-front/static/js/runtime-main.a460085e.js",
+    "runtime-main.js.map": "/diplomski-front/static/js/runtime-main.a460085e.js.map",
+    "static/js/2.b1b58dd5.chunk.js": "/diplomski-front/static/js/2.b1b58dd5.chunk.js",
+    "static/js/2.b1b58dd5.chunk.js.map": "/diplomski-front/static/js/2.b1b58dd5.chunk.js.map",
+    "static/js/3.180faf99.chunk.js": "/diplomski-front/static/js/3.180faf99.chunk.js",
+    "static/js/3.180faf99.chunk.js.map": "/diplomski-front/static/js/3.180faf99.chunk.js.map",
+    "index.html": "/diplomski-front/index.html",
+    "static/css/main.907773be.chunk.css.map": "/diplomski-front/static/css/main.907773be.chunk.css.map",
+    "static/js/2.b1b58dd5.chunk.js.LICENSE.txt": "/diplomski-front/static/js/2.b1b58dd5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a460085e.js",
+    "static/js/2.b1b58dd5.chunk.js",
+    "static/css/main.907773be.chunk.css",
+    "static/js/main.5512bfb0.chunk.js"
+  ]
+}
