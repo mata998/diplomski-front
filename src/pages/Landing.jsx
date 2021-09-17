@@ -119,6 +119,7 @@ export default function Landing() {
 
   return (
     <div>
+      <h1>{process.env.REACT_APP_PROBA}</h1>
       <div
         style={{
           display: "flex",

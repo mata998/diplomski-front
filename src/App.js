@@ -19,7 +19,10 @@ function App() {
         <Router basename="">
           {/* ajmoo :( */}
           <Switch>
-            <Route path="/login" render={(props) => <Landing {...props} />} />
+            <Route
+              path={`${process.env.REACT_APP_PUBLIC_URL}/login`}
+              render={(props) => <Landing {...props} />}
+            />
             <Route
               path="/course"
               exact
