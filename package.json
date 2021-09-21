@@ -21,7 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dbuild": "react-scripts build && rm -r ../diplomski-back/build && cp -r build ../diplomski-back/build"
+    "dbuild": "react-scripts build && rm -r ../diplomski-back/build && cp -r build ../diplomski-back/build",
+    "fullbuild": "npm run dbuild && cd ../diplomski-back && npm run dbuild"
   },
   "eslintConfig": {
     "extends": [

@@ -1,60 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
-import { GlobalContext } from "../context/GlobalContext";
 import { getFingerprint, serverURL } from "../utils/utils";
 import axios from "axios";
+import { GlobalContext } from "../context/GlobalContext";
 
-import { initializeApp, getApps } from "firebase/app";
+export default function Register({ uid, mail }) {
+  const { user, setUser, loggedIn, setLoggedIn, setRegistered } =
+    useContext(GlobalContext);
 
-import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithRedirect,
-  getRedirectResult,
-} from "firebase/auth";
-
-export default function Register({ firebaseConfig }) {
-  const { user, setUser, fbInitialized } = useContext(GlobalContext);
+  const [inputName, setInputName] = useState("");
   const history = useHistory();
 
-  const [googleLogedIn, setGoogleLogedIn] = useState(false);
-
-  const [mail, setMail] = useState("");
-  const [uid, setUid] = useState("");
-  const [inputName, setInputName] = useState("");
-
-  useEffect(() => {
-    initializeApp(firebaseConfig);
-
-    const auth = getAuth();
-
-    getRedirectResult(auth)
-      .then((result) => {
-        console.log(result);
-        console.log("Desio se redirect");
-        const user = result.user;
-        console.log(user);
-
-        setUid(user.uid);
-        setMail(user.email);
-        setGoogleLogedIn(true);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.log(error.message);
-      });
-  }, []);
-
-  const googleLogin = () => {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-
-    signInWithRedirect(auth, provider);
-  };
-
   const register = async () => {
-    if (!googleLogedIn || inputName == "") {
+    if (inputName == "" || uid == "") {
       alert("Ne moze tako");
       return;
     }
@@ -70,9 +28,10 @@ export default function Register({ firebaseConfig }) {
 
     if (res.data.success) {
       console.log("Uspesan register");
-      console.log(res.data.data);
+      console.log(res.data);
 
-      history.push("/login");
+      setRegistered(true);
+      history.push("/");
     } else {
       console.log("Neuspesan register");
       console.log(res.data.err);
@@ -82,16 +41,13 @@ export default function Register({ firebaseConfig }) {
 
   return (
     <>
-      <div>Mail: </div>
-      {googleLogedIn ? (
-        <span>{mail}</span>
-      ) : (
-        <button style={{ padding: "5px" }} onClick={googleLogin}>
-          Google nalog
-        </button>
-      )}
+      <div>Register</div>
 
       <br />
+      <br />
+
+      <div>Mail: {mail}</div>
+
       <br />
 
       <div>Ime: </div>
@@ -99,10 +55,8 @@ export default function Register({ firebaseConfig }) {
         type="text"
         value={inputName}
         onChange={(e) => setInputName(e.target.value)}
-        style={{ padding: "5px" }}
       />
 
-      <br />
       <br />
 
       <button style={{ padding: "15px" }} onClick={register}>

@@ -22,5 +22,6 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+input {
+  padding: 5px;
 }

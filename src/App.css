@@ -27,6 +27,23 @@
   cursor: pointer;
 }
 
+/* Admin */
+
+.admin-container {
+  width: 80vw;
+  text-align: left;
+}
+
+/* Admin create course */
+
+.create-course textarea {
+  padding: 5px;
+  display: block;
+  resize: none;
+}
+
+/* Admin all courses */
+
 /* NA KRAJU */
 .hidden {
   display: none;

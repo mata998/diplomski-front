@@ -8,12 +8,12 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import LoginRegister from "./pages/LoginRegister.jsx";
 import Course from "./pages/Course.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Landing from "./pages/Landing.jsx";
 import MyCourses from "./pages/MyCourses.jsx";
-import RegisterNew from "./pages/RegisterNew.jsx";
+import Register from "./pages/Register.jsx";
+import Admin from "./pages/Admin.jsx";
 import { GlobalProvider, GlobalContext } from "./context/GlobalContext.js";
 
 import { initializeApp } from "firebase/app";
@@ -120,7 +120,7 @@ function App() {
         <Route
           path={"/register"}
           exact
-          render={(props) => <RegisterNew {...props} uid={uid} mail={mail} />}
+          render={(props) => <Register {...props} uid={uid} mail={mail} />}
         />
         <Route
           path={"/my-courses"}
@@ -128,14 +128,11 @@ function App() {
           render={(props) => <MyCourses {...props} />}
         />
         <Route
-          path={"/login"}
-          render={(props) => <LoginRegister {...props} />}
-        />
-        <Route
           path="/course/:courseId"
           exact
           render={(props) => <Course {...props} />}
         />
+        <Route path="/admin" render={(props) => <Admin {...props} />} />
       </Switch>
     </div>
   );
