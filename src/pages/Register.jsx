@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import { GlobalContext } from "../context/GlobalContext";
-import { getFingerprint, serverURL } from "../utils/Utils";
+import { getFingerprint, serverURL } from "../utils/utils";
 import axios from "axios";
 
 import { initializeApp, getApps } from "firebase/app";
@@ -14,6 +16,7 @@ import {
 
 export default function Register({ firebaseConfig }) {
   const { user, setUser, fbInitialized } = useContext(GlobalContext);
+  const history = useHistory();
 
   const [googleLogedIn, setGoogleLogedIn] = useState(false);
 
@@ -28,11 +31,8 @@ export default function Register({ firebaseConfig }) {
 
     getRedirectResult(auth)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-
-        // The signed-in user info.
+        console.log(result);
+        console.log("Desio se redirect");
         const user = result.user;
         console.log(user);
 
@@ -67,7 +67,17 @@ export default function Register({ firebaseConfig }) {
     };
 
     const res = await axios.post(`${serverURL()}/api/login/register`, data);
-    console.log(res);
+
+    if (res.data.success) {
+      console.log("Uspesan register");
+      console.log(res.data.data);
+
+      history.push("/login");
+    } else {
+      console.log("Neuspesan register");
+      console.log(res.data.err);
+      alert("Neuspesan register");
+    }
   };
 
   return (

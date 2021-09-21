@@ -5,7 +5,7 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [fbInitialized, setFbInitialized] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -14,8 +14,8 @@ export const GlobalProvider = ({ children }) => {
         setUser,
         loggedIn,
         setLoggedIn,
-        fbInitialized,
-        setFbInitialized,
+        registered,
+        setRegistered,
       }}
     >
       {children}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import { getFingerprint, serverURL } from "../utils/Utils";
+import { getFingerprint, serverURL } from "../utils/utils";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
-import { initializeApp, getApps } from "firebase/app";
+import { initializeApp } from "firebase/app";
 
 import {
   GoogleAuthProvider,
@@ -12,37 +13,35 @@ import {
   getRedirectResult,
 } from "firebase/auth";
 
-export default function Login({ firebaseConfig, init }) {
-  const { user, setUser, loggedIn, setLoggedIn, fbInitialized } =
-    useContext(GlobalContext);
+export default function Login({ firebaseConfig }) {
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(GlobalContext);
 
-  const [googleLogedIn, setGoogleLogedIn] = useState(false);
-  const [uid, setUid] = useState("");
   const [failMsg, setFailMsg] = useState("");
 
   useEffect(() => {
-    console.log("????");
+    if (!loggedIn) {
+      initializeApp(firebaseConfig);
 
-    initializeApp(firebaseConfig);
+      const auth = getAuth();
 
-    const auth = getAuth();
+      getRedirectResult(auth)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
 
-    getRedirectResult(auth)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+          const data = {
+            userId: user.uid,
+            fingerprint: JSON.stringify(getFingerprint()),
+          };
 
-        const data = {
-          userId: user.uid,
-          fingerprint: JSON.stringify(getFingerprint()),
-        };
-
-        login(data);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.log(error.message);
-      });
+          login(data);
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          console.log("error u redirectu");
+          console.log(error.message);
+        });
+    }
   }, []);
 
   const googleLogin = () => {
@@ -58,6 +57,11 @@ export default function Login({ firebaseConfig, init }) {
     console.log(res);
 
     if (res.data.success) {
+      const cookies = new Cookies();
+      cookies.set("token", res.data.data.token);
+
+      console.log(cookies);
+
       setUser(res.data.data);
       setLoggedIn(true);
       setFailMsg("");

@@ -25,9 +25,12 @@ function getGPU() {
 }
 
 function getFingerprint() {
+  // na http nema:
+  //    ram: navigator.deviceMemory
+  //    mobile: navigator.userAgentData.mobile
+
   const fingerprint = {
     gpu: getGPU(),
-    ram: navigator.deviceMemory,
     cores: navigator.hardwareConcurrency,
     platform: navigator.platform,
     screen: `[${window.screen.height}, ${window.screen.width}]`,
@@ -35,10 +38,9 @@ function getFingerprint() {
     colorDepth: window.screen.colorDepth,
     orientation: window.screen.orientation.type,
     userAgent: navigator.userAgent,
-    mobile: navigator.userAgentData.mobile,
   };
 
-  console.log({ a: JSON.stringify(fingerprint) });
+  console.log(fingerprint);
   return fingerprint;
 }
 
