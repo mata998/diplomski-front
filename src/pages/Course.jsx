@@ -9,6 +9,7 @@ export default function Course() {
   const [course, setCourse] = useState({});
   const [videos, setVideos] = useState([]);
   const [selectedPath, setSelectedPath] = useState("");
+  const [selectedName, setSelectedName] = useState("");
 
   useEffect(() => {
     getData();
@@ -36,9 +37,17 @@ export default function Course() {
     }
   };
 
+  const selectVideo = (video) => {
+    setSelectedPath(video.path);
+    setSelectedName(video.name);
+  };
+
   return (
     <div>
       <h1>{course.name}</h1>
+      <br />
+
+      <h5 style={{ textAlign: "left" }}>{selectedName}</h5>
       <br />
       <div
         style={{
@@ -51,7 +60,7 @@ export default function Course() {
           src={`${serverURL()}/api/course/video?name=${selectedPath}`}
           controls
         />
-        <CourseMenu videos={videos} setSelectedPath={setSelectedPath} />
+        <CourseMenu videos={videos} selectVideo={selectVideo} />
       </div>
     </div>
   );

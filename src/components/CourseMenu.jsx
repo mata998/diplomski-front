@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export default function CourseMenu({ videos, setSelectedPath }) {
+export default function CourseMenu({ videos, selectVideo }) {
   const [foldersObj, setFoldersObj] = useState({});
 
   useEffect(() => {
     if (videos[0]) {
-      setSelectedPath(videos[0].path);
+      selectVideo(videos[0]);
     }
     setFoldersObj(parseInput(videos));
   }, [videos]);
@@ -42,7 +42,7 @@ export default function CourseMenu({ videos, setSelectedPath }) {
 
   const videoClicked = (data) => {
     console.log(data);
-    setSelectedPath(data.path);
+    selectVideo(data);
   };
 
   const rednerMenu = (obj) => {
