@@ -27,7 +27,7 @@ export default function AdminCreateCourse() {
 
     if (res.data.success) {
       console.log(res.data);
-      history.push("/admin/all-courses");
+      history.push("/admin/courses");
     } else {
       console.log(res.data.err);
       alert(`Error course not created`);

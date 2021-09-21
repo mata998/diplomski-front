@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 export default function CourseMenu({ videos, setSelectedPath }) {
-  const input = [
-    "klk1/1) uvod/1) video1",
-    "klk1/1) uvod/2) video2",
-    "klk1/2) petlje/1) for/1) videofor",
-    "klk1/2) petlje/1) for/2) video2for",
-    "klk1/2) petlje/2) while/1) videowhile",
-    "klk1/2) petlje/3) i ovo je video",
-  ];
-
   const [foldersObj, setFoldersObj] = useState({});
 
   useEffect(() => {
+    if (videos[0]) {
+      setSelectedPath(videos[0].path);
+    }
     setFoldersObj(parseInput(videos));
   }, [videos]);
 
