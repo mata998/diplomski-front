@@ -22,6 +22,22 @@ export default function AdminAllUsers() {
     }
   };
 
+  const deleteUser = async ({ userid, name }) => {
+    const answer = window.confirm(`Delete user: ${name}?`);
+
+    if (answer == false) {
+      return;
+    }
+
+    const res = await axios.delete(`${serverURL()}/api/admin/users/${userid}`, {
+      withCredentials: true,
+    });
+
+    console.log(res.data);
+
+    getData();
+  };
+
   return (
     <div className="admin-container">
       <div>All users</div>
@@ -34,7 +50,12 @@ export default function AdminAllUsers() {
             <div key={user.userid}>{user.name}</div>
 
             <div style={{ display: "flex", gap: "20px" }}>
-              <div>Delete</div>
+              <div
+                style={{ color: "rgb(255, 176, 176)", cursor: "pointer" }}
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </div>
             </div>
           </div>
         ))}

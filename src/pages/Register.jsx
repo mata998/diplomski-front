@@ -5,8 +5,7 @@ import axios from "axios";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function Register({ uid, mail }) {
-  const { user, setUser, loggedIn, setLoggedIn, setRegistered } =
-    useContext(GlobalContext);
+  const { user, setUser, loggedIn, setRegistered } = useContext(GlobalContext);
 
   const [inputName, setInputName] = useState("");
   const history = useHistory();

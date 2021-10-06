@@ -8,15 +8,17 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
+import { GlobalProvider, GlobalContext } from "./context/GlobalContext.js";
+
+import { initializeApp } from "firebase/app";
+
 import Course from "./pages/Course.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Landing from "./pages/Landing.jsx";
 import MyCourses from "./pages/MyCourses.jsx";
 import Register from "./pages/Register.jsx";
 import Admin from "./pages/Admin.jsx";
-import { GlobalProvider, GlobalContext } from "./context/GlobalContext.js";
-
-import { initializeApp } from "firebase/app";
+import PeraUpload from "./pera-upload/PeraUpload";
 
 import {
   GoogleAuthProvider,
@@ -47,7 +49,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("Desava se uef app.js");
     if (!loggedIn) {
       initializeApp(firebaseConfig);
 
@@ -62,6 +63,8 @@ function App() {
         })
         .catch((error) => {
           // Handle Errors here.
+          new Cookies().remove("token");
+
           console.log("error u redirectu");
           console.log(error.message);
         });
@@ -85,9 +88,7 @@ function App() {
 
     // login
     if (res.data.case == "login") {
-      const cookies = new Cookies();
-      cookies.set("token", res.data.data.token);
-
+      new Cookies().set("token", res.data.data.token);
       console.log(res.data.data);
 
       setUser(res.data.data);
@@ -103,11 +104,13 @@ function App() {
     }
     // bad fingerprint
     else if (res.data.case == "fingerprint") {
+      new Cookies().remove("token");
       alert("Los fingerprint");
       console.log("los fingerprint");
     }
     // error
     else {
+      new Cookies().remove("token");
       console.log(res);
     }
   };
@@ -133,6 +136,11 @@ function App() {
           render={(props) => <Course {...props} />}
         />
         <Route path="/admin" render={(props) => <Admin {...props} />} />
+        <Route
+          path="/pera"
+          exact
+          render={(props) => <PeraUpload {...props} />}
+        />
       </Switch>
     </div>
   );

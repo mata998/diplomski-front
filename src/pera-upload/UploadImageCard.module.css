@@ -1,0 +1,38 @@
+.imgContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  /* border: 1px solid black; */
+  border-radius: 4px;
+  padding: 24px;
+  transition: all 0.1s ease-in-out;
+  -webkit-box-shadow: 3px 5px 15px 5px rgba(0, 0, 0, 0.61);
+  box-shadow: 3px 5px 15px 5px rgba(0, 0, 0, 0.61);
+  /* cursor: pointer; */
+}
+
+.imgContainer:hover {
+  transform: scale(1.007);
+  -webkit-box-shadow: 3px 5px 15px 5px rgba(0, 0, 0, 0.37);
+  box-shadow: 3px 5px 15px 5px rgba(0, 0, 0, 0.37);
+}
+/* 
+.img-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+} */
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.removeBtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}

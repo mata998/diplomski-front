@@ -8,6 +8,7 @@ export default function CourseMenu({ videos, selectVideo }) {
       selectVideo(videos[0]);
     }
     setFoldersObj(parseInput(videos));
+    console.log(parseInput(videos));
   }, [videos]);
 
   const parseInput = (videos) => {
@@ -36,13 +37,8 @@ export default function CourseMenu({ videos, selectVideo }) {
     addVideoRek(obj[pathsArr[index]], pathsArr, index + 1, data);
   };
 
-  const toggleContent = (e) => {
+  const folderClicked = (e) => {
     e.target.nextSibling.classList.toggle("hidden");
-  };
-
-  const videoClicked = (data) => {
-    console.log(data);
-    selectVideo(data);
   };
 
   const rednerMenu = (obj) => {
@@ -55,7 +51,7 @@ export default function CourseMenu({ videos, selectVideo }) {
               // video jsx
               return (
                 <div
-                  onClick={() => videoClicked(obj[item].data)}
+                  onClick={() => selectVideo(obj[item].data)}
                   style={{ color: "lightblue" }}
                 >
                   {item}
@@ -65,7 +61,7 @@ export default function CourseMenu({ videos, selectVideo }) {
               // folder jsx
               return (
                 <div>
-                  <div onClick={toggleContent}>{item}</div>
+                  <div onClick={folderClicked}>{item}</div>
                   <div style={{ paddingLeft: "20px" }}>
                     {rednerMenu(obj[item])}
                   </div>

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
 
 export default function AdminAllCourses() {
   const [courses, setCourses] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getData();
@@ -57,7 +59,12 @@ export default function AdminAllCourses() {
               width: "20vw",
             }}
           >
-            <div>{course.name}</div>
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => history.push(`/admin/course/${course.courseid}`)}
+            >
+              {course.name}
+            </div>
             <div
               style={{ color: "rgb(255, 176, 176)", cursor: "pointer" }}
               onClick={() => deleteCourse(course)}

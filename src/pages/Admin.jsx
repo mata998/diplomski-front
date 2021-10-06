@@ -3,12 +3,12 @@ import { GlobalContext } from "../context/GlobalContext";
 import { useHistory } from "react-router";
 import { Link, Switch, Route } from "react-router-dom";
 import { serverURL } from "../utils/utils";
-import AdminAllCourses from "../components/AdminAllCourses.jsx";
-import AdminCreateCourse from "../components/AdminCreateCourse.jsx";
-import AdminAllUsers from "../components/AdminAllUsers.jsx";
-import AdminAllCreators from "../components/AdminAllCreators.jsx";
-
 import axios from "axios";
+import AdminAllCourses from "../admin-components/AdminAllCourses";
+import AdminCreateCourse from "../admin-components/AdminCreateCourse.jsx";
+import AdminAllUsers from "../admin-components/AdminAllUsers.jsx";
+import AdminAllCreators from "../admin-components/AdminAllCreators.jsx";
+import AdminCourse from "../admin-components/AdminCourse";
 
 export default function Admin() {
   const { loggedIn } = useContext(GlobalContext);
@@ -78,6 +78,11 @@ export default function Admin() {
           path={"/admin/creators"}
           exact
           render={(props) => <AdminAllCreators {...props} />}
+        />
+        <Route
+          path={"/admin/course/:courseId"}
+          exact
+          render={(props) => <AdminCourse {...props} />}
         />
       </Switch>
     </>
