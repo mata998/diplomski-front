@@ -49,7 +49,7 @@ export default function CourseMenu({ videos, selectVideo }) {
     console.log(folderPath);
   };
 
-  const rednerMenu = (obj) => {
+  const renderMenu = (obj) => {
     if (obj.data) return;
     else
       return (
@@ -74,7 +74,7 @@ export default function CourseMenu({ videos, selectVideo }) {
                   folderPath={obj[item].folderPath}
                   folderClicked={folderClicked}
                   // Recursion call
-                  subFolders={rednerMenu(obj[item])}
+                  subFolders={renderMenu(obj[item])}
                 />
               );
             }
@@ -85,7 +85,7 @@ export default function CourseMenu({ videos, selectVideo }) {
 
   return (
     <div style={{ width: "300px", textAlign: "left" }}>
-      {rednerMenu(foldersObj)}
+      {renderMenu(foldersObj)}
     </div>
   );
 }

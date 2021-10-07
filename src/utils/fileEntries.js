@@ -23,7 +23,7 @@ async function readEntriesPromise(directoryReader) {
 }
 
 // Drop handler function to get all files
-export async function getAllFileEntries(dataTransferItemList) {
+async function getAllFileEntries(dataTransferItemList) {
   let fileEntries = [];
   // Use BFS to traverse entire directory/file structure
   let queue = [];
@@ -44,18 +44,29 @@ export async function getAllFileEntries(dataTransferItemList) {
   return fileEntries;
 }
 
+// Promisify .file() function
+async function getFile(fileEntry) {
+  try {
+    return await new Promise((resolve, reject) =>
+      fileEntry.file(resolve, reject)
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // File entries to files
-export async function entriesToFiles(entries) {
+async function entriesToFiles(entries) {
   const arr = [];
 
   for (const entry of entries) {
     try {
-      entry.file = util.promisify(entry.file);
-      await entry.file();
-    } catch (f) {
-      // Ovde je dobar file??
-      f.fullPath = entry.fullPath.substring(1);
-      arr.push(f);
+      const file = await getFile(entry);
+      file.fullPath = entry.fullPath.substring(1);
+
+      arr.push(file);
+    } catch (err) {
+      console.log(err.message);
     }
   }
 
@@ -65,5 +76,5 @@ export async function entriesToFiles(entries) {
 export async function getAllFiles(dataTransferItemList) {
   const items = await getAllFileEntries(dataTransferItemList);
 
-  return await entriesToFiles(items);
+  return entriesToFiles(items);
 }

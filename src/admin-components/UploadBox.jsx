@@ -14,8 +14,9 @@ export default function UploadBox() {
     e.preventDefault();
 
     const uploadedFiles = await getAllFiles(e.dataTransfer.items);
+    console.log("ovo");
     console.log(uploadedFiles);
-    setFiles(uploadedFiles);
+    // setFiles(uploadedFiles);
   };
 
   const uploadFiles = async () => {
