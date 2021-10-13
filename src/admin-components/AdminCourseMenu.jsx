@@ -2,21 +2,32 @@ import React, { useState, useEffect } from "react";
 import AdminVideoCard from "./AdminVideoCard";
 import AdminFolderCard from "./AdminFolderCard";
 
-export default function CourseMenu({ videos, selectVideo }) {
+export default function CourseMenu({
+  videos,
+  videoClicked,
+  folderClicked,
+  deleteVideoClicked,
+}) {
   const [foldersObj, setFoldersObj] = useState({});
 
   useEffect(() => {
     if (videos[0]) {
-      selectVideo(videos[0]);
+      videoClicked(videos[0]);
       setFoldersObj(parseInput(videos));
       console.log(parseInput(videos));
     }
   }, [videos]);
 
   const parseInput = (videos) => {
+    const splitPath = videos[0].path.split("/");
+
+    // if first path is: "1/Java/1) Uvod"
+    // selected folder should be "1/Java"
+    folderClicked(splitPath[0] + "/" + splitPath[1]);
+
     // if first path is: "1/Java/1) Uvod"
     // pathStart should be "1"
-    const pathStart = videos[0].path.split("/")[0];
+    const pathStart = splitPath[0];
 
     const parsedRes = { folderPath: pathStart };
 
@@ -45,10 +56,6 @@ export default function CourseMenu({ videos, selectVideo }) {
     addVideoRek(obj[pathsArr[index]], pathsArr, index + 1, data);
   };
 
-  const folderClicked = (folderPath) => {
-    console.log(folderPath);
-  };
-
   const renderMenu = (obj) => {
     if (obj.data) return;
     else
@@ -63,7 +70,8 @@ export default function CourseMenu({ videos, selectVideo }) {
               return (
                 <AdminVideoCard
                   videoData={obj[item].data}
-                  selectVideo={selectVideo}
+                  videoClicked={videoClicked}
+                  deleteVideoClicked={deleteVideoClicked}
                 />
               );
             } else {

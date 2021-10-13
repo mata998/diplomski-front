@@ -9,6 +9,7 @@ export default function AdminCourse() {
   const { courseId } = useParams();
   const [course, setCourse] = useState({});
   const [videos, setVideos] = useState([]);
+  const [selectedFolder, setSelectedFolder] = useState("");
 
   useEffect(() => {
     getData();
@@ -36,8 +37,36 @@ export default function AdminCourse() {
     }
   };
 
-  const selectVideo = (video) => {
+  const videoClicked = (video) => {
     console.log(video);
+  };
+
+  const folderClicked = (folderPath) => {
+    console.log(folderPath);
+    setSelectedFolder(folderPath);
+  };
+
+  const deleteVideoClicked = async (video) => {
+    console.log(video);
+
+    const answer = window.confirm(`Delete video: ${video.name}?`);
+
+    if (answer == false) {
+      return;
+    }
+
+    const res = await axios.delete(
+      `${serverURL()}/api/admin/videos/${video.videoid}`,
+      { withCredentials: true }
+    );
+
+    if (res.data.success) {
+      console.log(res.data);
+      getData();
+    } else {
+      console.log(res);
+      alert("Error video was not deleted");
+    }
   };
 
   return (
@@ -48,8 +77,16 @@ export default function AdminCourse() {
         justifyContent: "space-between",
       }}
     >
-      <AdminCourseMenu videos={videos} selectVideo={selectVideo} />
-      <UploadBox />
+      <AdminCourseMenu
+        videos={videos}
+        videoClicked={videoClicked}
+        folderClicked={folderClicked}
+        deleteVideoClicked={deleteVideoClicked}
+      />
+      <div>
+        <div>Folder: {selectedFolder}</div>
+        <UploadBox selectedFolder={selectedFolder} getData={getData} />
+      </div>
     </div>
   );
 }
