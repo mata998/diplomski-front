@@ -3,18 +3,26 @@ import AdminVideoCard from "./AdminVideoCard";
 import AdminFolderCard from "./AdminFolderCard";
 
 export default function CourseMenu({
+  course,
   videos,
   videoClicked,
   folderClicked,
   deleteVideoClicked,
 }) {
-  const [foldersObj, setFoldersObj] = useState({});
+  const [menu, setMenu] = useState([]);
+
+  useEffect(() => {
+    folderClicked(course.courseid + "/" + course.name);
+  }, [course]);
 
   useEffect(() => {
     if (videos[0]) {
       videoClicked(videos[0]);
-      setFoldersObj(parseInput(videos));
-      console.log(parseInput(videos));
+      const foldersObj = parseInput(videos);
+      console.log(foldersObj);
+      setMenu(renderMenu(foldersObj));
+    } else {
+      setMenu([]);
     }
   }, [videos]);
 
@@ -23,7 +31,7 @@ export default function CourseMenu({
 
     // if first path is: "1/Java/1) Uvod"
     // selected folder should be "1/Java"
-    folderClicked(splitPath[0] + "/" + splitPath[1]);
+    // folderClicked(splitPath[0] + "/" + splitPath[1]);
 
     // if first path is: "1/Java/1) Uvod"
     // pathStart should be "1"
@@ -93,7 +101,8 @@ export default function CourseMenu({
 
   return (
     <div style={{ width: "300px", textAlign: "left" }}>
-      {renderMenu(foldersObj)}
+      {/* {renderMenu(foldersObj)} */}
+      {menu}
     </div>
   );
 }

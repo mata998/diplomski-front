@@ -44,17 +44,14 @@ export default function Admin() {
       <div className="navbar">
         <ul className="nav-links">
           <Link className="nav-link" to="/admin/courses">
-            All courses
-          </Link>
-          <Link className="nav-link" to="/admin/create-course">
-            New course
+            Courses
           </Link>
           <Link className="nav-link" to="/admin/users">
             Users
           </Link>
-          <Link className="nav-link" to="/admin/creators">
+          {/* <Link className="nav-link" to="/admin/creators">
             Creators
-          </Link>
+          </Link> */}
         </ul>
       </div>
 

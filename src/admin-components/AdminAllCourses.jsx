@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
 
@@ -73,6 +74,14 @@ export default function AdminAllCourses() {
             </div>
           </div>
         ))}
+        <div
+          style={{
+            marginTop: "35px",
+            cursor: "pointer",
+          }}
+        >
+          <Link to="/admin/create-course">+ New course</Link>
+        </div>
       </div>
     </div>
   );

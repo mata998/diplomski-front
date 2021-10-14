@@ -34,6 +34,8 @@ export default function AdminCourse() {
       console.log(res.data.data);
     } else {
       console.log(res.data);
+      console.log("ovooo?");
+      setVideos([]);
     }
   };
 
@@ -65,7 +67,7 @@ export default function AdminCourse() {
       getData();
     } else {
       console.log(res);
-      alert("Error video was not deleted");
+      alert("Error: video was not deleted");
     }
   };
 
@@ -78,6 +80,7 @@ export default function AdminCourse() {
       }}
     >
       <AdminCourseMenu
+        course={course}
         videos={videos}
         videoClicked={videoClicked}
         folderClicked={folderClicked}
