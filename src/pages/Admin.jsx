@@ -9,6 +9,7 @@ import AdminCreateCourse from "../admin-components/AdminCreateCourse.jsx";
 import AdminAllUsers from "../admin-components/AdminAllUsers.jsx";
 import AdminAllCreators from "../admin-components/AdminAllCreators.jsx";
 import AdminCourse from "../admin-components/AdminCourse";
+import AdminRequests from "../admin-components/AdminRequests";
 
 export default function Admin() {
   const { loggedIn } = useContext(GlobalContext);
@@ -46,12 +47,12 @@ export default function Admin() {
           <Link className="nav-link" to="/admin/courses">
             Courses
           </Link>
+          <Link className="nav-link" to="/admin/requests">
+            Requests
+          </Link>
           <Link className="nav-link" to="/admin/users">
             Users
           </Link>
-          {/* <Link className="nav-link" to="/admin/creators">
-            Creators
-          </Link> */}
         </ul>
       </div>
 
@@ -67,14 +68,14 @@ export default function Admin() {
           render={(props) => <AdminCreateCourse {...props} />}
         />
         <Route
+          path={"/admin/requests"}
+          exact
+          render={(props) => <AdminRequests {...props} />}
+        />
+        <Route
           path={"/admin/users"}
           exact
           render={(props) => <AdminAllUsers {...props} />}
-        />
-        <Route
-          path={"/admin/creators"}
-          exact
-          render={(props) => <AdminAllCreators {...props} />}
         />
         <Route
           path={"/admin/course/:courseId"}

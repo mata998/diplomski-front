@@ -121,9 +121,17 @@ function App() {
     }
   };
 
+  const logout = () => {
+    new Cookies().remove("token");
+    setUser({});
+    setLoggedIn(false);
+    setRegistered(false);
+    history.push("/");
+  };
+
   return (
     <div className="App">
-      <Navbar googleLogin={googleLogin} />
+      <Navbar googleLogin={googleLogin} logout={logout} />
       <Switch>
         <Route path={"/"} exact render={(props) => <Landing {...props} />} />
         <Route
@@ -142,11 +150,6 @@ function App() {
           render={(props) => <Course {...props} />}
         />
         <Route path="/admin" render={(props) => <Admin {...props} />} />
-        <Route
-          path="/pera"
-          exact
-          render={(props) => <PeraUpload {...props} />}
-        />
       </Switch>
     </div>
   );

@@ -107,6 +107,72 @@ p {
   resize: none;
 }
 
+/* Admin all requests */
+
+.all-requests {
+  width: 650px;
+  text-align: left;
+}
+
+.all-requests .course-name {
+  margin-top: 50px;
+  border-bottom: 2px solid white;
+  padding-bottom: 10px;
+}
+
+.all-requests .course-request {
+  padding: 20px 0;
+  border-bottom: 1px solid white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.all-requests .course-request:hover {
+  background-color: #2e323b;
+}
+
+.all-requests .user-name {
+  width: 50%;
+}
+
+.all-requests .btn-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.all-requests .approve,
+.all-requests .decline {
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+.all-requests .approve {
+  color: rgb(0, 207, 0);
+}
+.all-requests .decline {
+  color: rgb(209, 0, 0);
+}
+
+.all-requests .approved,
+.all-requests .declined {
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+.all-requests .approved {
+  color: rgb(0, 207, 0);
+}
+
+.all-requests .declined {
+  color: rgb(209, 0, 0);
+}
+
 /* Admin all courses */
 
 /* NA KRAJU */

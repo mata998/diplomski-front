@@ -9,7 +9,6 @@ export default function Landing() {
 
   useEffect(() => {
     getData();
-    console.log("aaa");
   }, [loggedIn]);
 
   const getData = async () => {

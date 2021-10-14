@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useHistory } from "react-router";
 import { serverURL } from "../utils/utils";
+import { GlobalContext } from "../context/GlobalContext";
 import axios from "axios";
 import CourseMenu from "../components/CourseMenu";
 
 export default function Course() {
   const { courseId } = useParams();
+  const { user, loggedIn } = useContext(GlobalContext);
   const [course, setCourse] = useState({});
   const [videos, setVideos] = useState([]);
   const [selectedPath, setSelectedPath] = useState("");
   const [selectedName, setSelectedName] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
+    if (!loggedIn) {
+      history.push("/");
+    }
+
     getData();
   }, []);
 
