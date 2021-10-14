@@ -1,3 +1,16 @@
+a {
+  color: white;
+  text-decoration: none;
+}
+
+input {
+  padding: 5px;
+}
+
+p {
+  font-size: 16px;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -8,8 +21,9 @@
   min-height: 100vh;
   background-color: #282c34;
   color: white;
-  font-size: calc(10px + 2vmin);
 }
+
+/* Navbar */
 
 .navbar {
   width: 100vw;
@@ -25,6 +39,57 @@
 .nav-link {
   padding: 30px 40px;
   cursor: pointer;
+}
+
+/* Landing */
+
+.course-card {
+  text-align: left;
+  width: 35vw;
+  padding: 20px;
+  margin: 15px 0;
+  border: 1px solid white;
+}
+
+.course-card .title {
+  margin-bottom: 10px;
+}
+
+.course-card .desc {
+  color: rgb(211, 211, 211);
+}
+
+.course-card .container {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 30px;
+}
+
+.course-card .request {
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 7px;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.course-card .request:hover {
+  transform: scale(1.1);
+}
+
+.course-card .owned {
+  font-size: 20px;
+  color: rgb(0, 155, 0);
+}
+.course-card .requested {
+  font-size: 20px;
+  color: rgb(219, 247, 63);
+}
+.course-card .finished {
+  font-size: 20px;
+  color: rgb(165, 0, 0);
 }
 
 /* Admin */

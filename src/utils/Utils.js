@@ -40,7 +40,6 @@ function getFingerprint() {
     userAgent: navigator.userAgent,
   };
 
-  console.log(fingerprint);
   return fingerprint;
 }
 

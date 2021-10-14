@@ -66,7 +66,7 @@ function App() {
           new Cookies().remove("token");
 
           console.log("error u redirectu");
-          console.log(error.message);
+          console.log(error);
         });
     }
   }, [registered]);
@@ -88,11 +88,17 @@ function App() {
 
     // login
     if (res.data.case == "login") {
-      new Cookies().set("token", res.data.data.token);
-      console.log(res.data.data);
+      const userInfo = res.data.data;
 
-      setUser(res.data.data);
+      new Cookies().set("token", userInfo.token);
+      console.log(userInfo);
+
+      setUser(userInfo);
       setLoggedIn(true);
+
+      if (userInfo.role == "admin") {
+        history.push("/admin/courses");
+      }
     }
     // register
     else if (res.data.case == "register") {

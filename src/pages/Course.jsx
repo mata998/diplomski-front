@@ -16,7 +16,7 @@ export default function Course() {
   }, []);
 
   const getData = async () => {
-    let res = await axios.get(`${serverURL()}/api/course/info/${courseId}`);
+    let res = await axios.get(`${serverURL()}/api/courses/info/${courseId}`);
 
     if (res.data.success) {
       console.log(res.data.data);
@@ -25,7 +25,7 @@ export default function Course() {
       console.log(res.data);
     }
 
-    res = await axios.get(`${serverURL()}/api/course/videos/${courseId}`, {
+    res = await axios.get(`${serverURL()}/api/courses/videos/${courseId}`, {
       withCredentials: true,
     });
 
@@ -57,7 +57,7 @@ export default function Course() {
       >
         <video
           width="800px"
-          src={`${serverURL()}/api/course/video?name=${selectedPath}`}
+          src={`${serverURL()}/api/courses/video?name=${selectedPath}`}
           controls
         />
         <CourseMenu videos={videos} selectVideo={selectVideo} />

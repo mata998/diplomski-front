@@ -13,7 +13,7 @@ export default function AdminAllCourses() {
   }, []);
 
   const getData = async () => {
-    const res = await axios.get(`${serverURL()}/api/course`);
+    const res = await axios.get(`${serverURL()}/api/courses`);
 
     if (res.data.success) {
       console.log(res.data.data);

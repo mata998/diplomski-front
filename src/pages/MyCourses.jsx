@@ -20,7 +20,7 @@ export default function MyCourses() {
   }, []);
 
   const getData = async () => {
-    const res = await axios.get(`${serverURL()}/api/course/unlocked`, {
+    const res = await axios.get(`${serverURL()}/api/courses/unlocked`, {
       withCredentials: true,
     });
 
