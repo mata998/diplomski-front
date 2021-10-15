@@ -30,8 +30,11 @@ export default function AdminAllUsers() {
 
       <div style={{ width: "40vw" }}>
         {users.map((user) => (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div key={user.userid}>{user.name}</div>
+          <div
+            style={{ display: "flex", justifyContent: "space-between" }}
+            key={user.userid}
+          >
+            <div>{user.name}</div>
 
             <div style={{ display: "flex", gap: "20px" }}>
               <div>Delete</div>

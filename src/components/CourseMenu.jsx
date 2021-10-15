@@ -25,11 +25,11 @@ export default function CourseMenu({ videos, selectVideo }) {
   };
 
   const addVideoRek = (obj, pathsArr, index, data) => {
-    if (obj[pathsArr[index]] == undefined) {
+    if (obj[pathsArr[index]] === undefined) {
       obj[pathsArr[index]] = {};
     }
 
-    if (index == pathsArr.length - 1) {
+    if (index === pathsArr.length - 1) {
       obj[pathsArr[index]] = { data };
       return;
     }

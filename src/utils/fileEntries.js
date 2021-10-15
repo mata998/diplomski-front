@@ -1,5 +1,3 @@
-import util from "util";
-
 // Get all the entries (files or sub-directories) in a directory by calling readEntries until it returns empty array
 async function readAllDirectoryEntries(directoryReader) {
   let entries = [];

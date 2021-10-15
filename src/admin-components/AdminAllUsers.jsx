@@ -25,7 +25,7 @@ export default function AdminAllUsers() {
   const deleteUser = async ({ userid, name }) => {
     const answer = window.confirm(`Delete user: ${name}?`);
 
-    if (answer == false) {
+    if (answer === false) {
       return;
     }
 
@@ -46,8 +46,11 @@ export default function AdminAllUsers() {
 
       <div style={{ width: "40vw" }}>
         {users.map((user) => (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div key={user.userid}>{user.name}</div>
+          <div
+            style={{ display: "flex", justifyContent: "space-between" }}
+            key={user.userid}
+          >
+            <div>{user.name}</div>
 
             <div style={{ display: "flex", gap: "20px" }}>
               <div

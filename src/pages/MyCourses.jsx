@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
-import Cookies from "universal-cookie";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function MyCourses() {
-  const { user, loggedIn } = useContext(GlobalContext);
+  const { loggedIn } = useContext(GlobalContext);
   const [myCourses, setMyCourses] = useState([]);
 
   const history = useHistory();

@@ -5,13 +5,13 @@ import axios from "axios";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function Register({ uid, mail }) {
-  const { user, setUser, loggedIn, setRegistered } = useContext(GlobalContext);
+  const { setRegistered } = useContext(GlobalContext);
 
   const [inputName, setInputName] = useState("");
   const history = useHistory();
 
   const register = async () => {
-    if (inputName == "" || uid == "") {
+    if (inputName === "" || uid === "") {
       alert("Ne moze tako");
       return;
     }

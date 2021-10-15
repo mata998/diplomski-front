@@ -2,13 +2,8 @@
 import "./App.css";
 
 import { useState, useEffect, useContext } from "react";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
-import { GlobalProvider, GlobalContext } from "./context/GlobalContext.js";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { GlobalContext } from "./context/GlobalContext.js";
 
 import { initializeApp } from "firebase/app";
 
@@ -18,7 +13,6 @@ import Landing from "./pages/Landing.jsx";
 import MyCourses from "./pages/MyCourses.jsx";
 import Register from "./pages/Register.jsx";
 import Admin from "./pages/Admin.jsx";
-import PeraUpload from "./pera-upload/PeraUpload";
 
 import {
   GoogleAuthProvider,
@@ -32,7 +26,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 function App() {
-  const { user, setUser, loggedIn, setLoggedIn, registered, setRegistered } =
+  const { setUser, loggedIn, setLoggedIn, registered, setRegistered } =
     useContext(GlobalContext);
   const history = useHistory();
   const [uid, setUid] = useState("");
@@ -87,7 +81,7 @@ function App() {
     const res = await axios.post(`${serverURL()}/api/login`, loginData);
 
     // login
-    if (res.data.case == "login") {
+    if (res.data.case === "login") {
       const userInfo = res.data.data;
 
       new Cookies().set("token", userInfo.token);
@@ -96,12 +90,12 @@ function App() {
       setUser(userInfo);
       setLoggedIn(true);
 
-      if (userInfo.role == "admin") {
+      if (userInfo.role === "admin") {
         history.push("/admin/courses");
       }
     }
     // register
-    else if (res.data.case == "register") {
+    else if (res.data.case === "register") {
       console.log("treba register");
 
       setUid(user.uid);
@@ -109,7 +103,7 @@ function App() {
       history.push(`/register`);
     }
     // bad fingerprint
-    else if (res.data.case == "fingerprint") {
+    else if (res.data.case === "fingerprint") {
       new Cookies().remove("token");
       alert("Los fingerprint");
       console.log("los fingerprint");

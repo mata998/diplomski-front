@@ -50,13 +50,13 @@ export default function CourseMenu({
   };
 
   const addVideoRek = (obj, pathsArr, index, data) => {
-    if (obj[pathsArr[index]] == undefined) {
+    if (obj[pathsArr[index]] === undefined) {
       obj[pathsArr[index]] = {
         folderPath: obj.folderPath + "/" + pathsArr[index],
       };
     }
 
-    if (index == pathsArr.length - 1) {
+    if (index === pathsArr.length - 1) {
       obj[pathsArr[index]] = { data };
       return;
     }
@@ -71,7 +71,7 @@ export default function CourseMenu({
         <>
           {Object.keys(obj).map((item) => {
             // skip folderPath property
-            if (item == "folderPath") return <></>;
+            if (item === "folderPath") return <></>;
 
             if (obj[item].data) {
               // Video card component

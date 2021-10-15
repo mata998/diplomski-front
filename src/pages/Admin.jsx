@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import { useHistory } from "react-router";
 import { Link, Switch, Route } from "react-router-dom";
@@ -7,7 +7,6 @@ import axios from "axios";
 import AdminAllCourses from "../admin-components/AdminAllCourses";
 import AdminCreateCourse from "../admin-components/AdminCreateCourse.jsx";
 import AdminAllUsers from "../admin-components/AdminAllUsers.jsx";
-import AdminAllCreators from "../admin-components/AdminAllCreators.jsx";
 import AdminCourse from "../admin-components/AdminCourse";
 import AdminRequests from "../admin-components/AdminRequests";
 
@@ -31,7 +30,7 @@ export default function Admin() {
 
     console.log(res);
 
-    if (res.data.success == false) {
+    if (res.data.success === false) {
       history.push("/");
     }
   };

@@ -26,7 +26,7 @@ export default function AdminAllCourses() {
   const deleteCourse = async ({ courseid, name }) => {
     const answer = window.confirm(`Delete course: ${name}?`);
 
-    if (answer == false) {
+    if (answer === false) {
       return;
     }
 

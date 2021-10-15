@@ -1,10 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import {
-  getAllFiles,
-  getAllFileEntries,
-  entriesToFiles,
-} from "../utils/fileEntries";
+import { getAllFiles } from "../utils/fileEntries";
 import { serverURL } from "../utils/utils";
 
 export default function UploadBox({ selectedFolder, getData }) {
@@ -62,7 +58,7 @@ export default function UploadBox({ selectedFolder, getData }) {
       </div>
       <div>
         {files.map((file) => (
-          <div>{file.fullPath}</div>
+          <div key={file.fullPath}>{file.fullPath}</div>
         ))}
       </div>
       <button onClick={uploadFiles}>Upload</button>

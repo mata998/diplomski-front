@@ -9,7 +9,7 @@ export default function AdminCreateCourse() {
   const history = useHistory();
 
   const createCourse = async () => {
-    if (name == "" || description == "") {
+    if (name === "" || description === "") {
       alert("Enter data");
       return;
     }

@@ -32,7 +32,7 @@ export default function Landing() {
 
   const requestCourse = async (e, course) => {
     const answer = window.confirm(`Request course: ${course.name}?`);
-    if (answer == false) {
+    if (answer === false) {
       return;
     }
 
@@ -51,7 +51,7 @@ export default function Landing() {
   };
 
   const courseType = (course) => {
-    if (course.userid == null) {
+    if (course.userid === null) {
       return (
         <div className="request" onClick={(e) => requestCourse(e, course)}>
           request
@@ -59,15 +59,15 @@ export default function Landing() {
       );
     }
 
-    if (course.unlockedat == null) {
+    if (course.unlockedat === null) {
       return <div className="requested">requested</div>;
     }
 
-    if (course.unlockedat != null && course.finishedat == null) {
+    if (course.unlockedat !== null && course.finishedat === null) {
       return <div className="owned">owned</div>;
     }
 
-    if (course.unlockedat != null && course.finishedat != null) {
+    if (course.unlockedat !== null && course.finishedat !== null) {
       return <div className="finished">finished</div>;
     }
   };

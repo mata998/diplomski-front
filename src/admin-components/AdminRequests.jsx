@@ -3,7 +3,6 @@ import axios from "axios";
 import { serverURL } from "../utils/utils";
 
 export default function AdminRequests() {
-  const [requestsObj, setRequestsObj] = useState({});
   const [requestsJSX, setRequestsJSX] = useState([]);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function AdminRequests() {
 
   const renderRequests = (requestsObj) => {
     const jsx = Object.values(requestsObj).map((course) => (
-      <div ket={course.courseName}>
+      <div key={course.courseName}>
         <h5 className="course-name">{course.courseName}</h5>
 
         {course.courseRequests.map((request) => (
@@ -91,7 +90,7 @@ export default function AdminRequests() {
       const children = [...parent.children];
 
       children.forEach((child, index) => {
-        if (index != 3) {
+        if (index !== 3) {
           child.classList.toggle("hidden");
         }
       });
@@ -120,7 +119,7 @@ export default function AdminRequests() {
       const children = [...parent.children];
 
       children.forEach((child, index) => {
-        if (index != 2) {
+        if (index !== 2) {
           child.classList.toggle("hidden");
         }
       });

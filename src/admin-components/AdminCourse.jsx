@@ -53,7 +53,7 @@ export default function AdminCourse() {
 
     const answer = window.confirm(`Delete video: ${video.name}?`);
 
-    if (answer == false) {
+    if (answer === false) {
       return;
     }
 

@@ -7,7 +7,7 @@ import CourseMenu from "../components/CourseMenu";
 
 export default function Course() {
   const { courseId } = useParams();
-  const { user, loggedIn } = useContext(GlobalContext);
+  const { loggedIn } = useContext(GlobalContext);
   const [course, setCourse] = useState({});
   const [videos, setVideos] = useState([]);
   const [selectedPath, setSelectedPath] = useState("");
