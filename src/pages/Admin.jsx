@@ -28,18 +28,16 @@ export default function Admin() {
       withCredentials: true,
     });
 
-    console.log(res);
-
-    if (res.data.success === false) {
+    if (res.data.success) {
+      console.log(res.data);
+    } else {
       history.push("/");
     }
   };
 
   return (
     <>
-      <div>
-        <h3>Admin</h3>
-      </div>
+      <h3>Admin</h3>
 
       <div className="navbar">
         <ul className="nav-links">

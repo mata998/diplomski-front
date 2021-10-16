@@ -26,7 +26,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 function App() {
-  const { setUser, loggedIn, setLoggedIn, registered, setRegistered } =
+  const { user, setUser, loggedIn, setLoggedIn, registered, setRegistered } =
     useContext(GlobalContext);
   const history = useHistory();
   const [uid, setUid] = useState("");
@@ -65,6 +65,12 @@ function App() {
     }
   }, [registered]);
 
+  useEffect(() => {
+    if (user.role === "admin") {
+      history.push("/admin/courses");
+    }
+  }, [user]);
+
   const googleLogin = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
@@ -90,9 +96,8 @@ function App() {
       setUser(userInfo);
       setLoggedIn(true);
 
-      if (userInfo.role === "admin") {
-        history.push("/admin/courses");
-      }
+      // redirect to admin page happenes
+      // in useEffect on setUser
     }
     // register
     else if (res.data.case === "register") {
