@@ -1,24 +1,50 @@
 import React, { useState, useEffect } from "react";
+import VideoCard from "./VideoCard";
+import FolderCard from "./FolderCard";
 
-export default function CourseMenu({ videos, selectVideo }) {
-  const [foldersObj, setFoldersObj] = useState({});
+export default function AdminCourseMenu({
+  type,
+  course,
+  videos,
+  videoClicked,
+  folderClicked,
+  deleteVideoClicked,
+}) {
+  const [menu, setMenu] = useState([]);
+
+  useEffect(() => {
+    folderClicked(course.courseid + "/" + course.name);
+  }, [course]);
 
   useEffect(() => {
     if (videos[0]) {
-      selectVideo(videos[0]);
+      videoClicked(videos[0]);
+      const foldersObj = parseInput(videos);
+      console.log(foldersObj);
+      setMenu(renderMenu(foldersObj));
+    } else {
+      setMenu([]);
     }
-    setFoldersObj(parseInput(videos));
-    console.log(parseInput(videos));
   }, [videos]);
 
   const parseInput = (videos) => {
-    const parsedRes = {};
+    const splitPath = videos[0].path.split("/");
+
+    // if first path is: "1/Java/1) Uvod"
+    // selected folder should be "1/Java"
+    // folderClicked(splitPath[0] + "/" + splitPath[1]);
+
+    // if first path is: "1/Java/1) Uvod"
+    // pathStart should be "1"
+    const pathStart = splitPath[0];
+
+    const parsedRes = { folderPath: pathStart };
 
     videos.forEach((video) => {
       const pathsArr = video.path.split("/");
 
-      // start at 2 if we want to skip first 2 folder "1" "Java"
-      addVideoRek(parsedRes, pathsArr, 2, video);
+      // start at 2 if we want to skip first 2 folders: "1" and "Java"
+      addVideoRek(parsedRes, pathsArr, 1, video);
     });
 
     return parsedRes;
@@ -26,7 +52,9 @@ export default function CourseMenu({ videos, selectVideo }) {
 
   const addVideoRek = (obj, pathsArr, index, data) => {
     if (obj[pathsArr[index]] === undefined) {
-      obj[pathsArr[index]] = {};
+      obj[pathsArr[index]] = {
+        folderPath: obj.folderPath + "/" + pathsArr[index],
+      };
     }
 
     if (index === pathsArr.length - 1) {
@@ -37,35 +65,36 @@ export default function CourseMenu({ videos, selectVideo }) {
     addVideoRek(obj[pathsArr[index]], pathsArr, index + 1, data);
   };
 
-  const folderClicked = (e) => {
-    e.target.nextSibling.classList.toggle("hidden");
-  };
-
-  const rednerMenu = (obj) => {
+  const renderMenu = (obj) => {
     if (obj.data) return;
     else
       return (
         <>
           {Object.keys(obj).map((item) => {
+            // skip folderPath property
+            if (item === "folderPath") return <></>;
+
             if (obj[item].data) {
-              // video jsx
+              // Video card component
               return (
-                <div
-                  onClick={() => selectVideo(obj[item].data)}
-                  style={{ color: "lightblue" }}
-                >
-                  {item}
-                </div>
+                <VideoCard
+                  type={type}
+                  videoData={obj[item].data}
+                  videoClicked={videoClicked}
+                  deleteVideoClicked={deleteVideoClicked}
+                />
               );
             } else {
-              // folder jsx
+              // Folder card component
               return (
-                <div>
-                  <div onClick={folderClicked}>{item}</div>
-                  <div style={{ paddingLeft: "20px" }}>
-                    {rednerMenu(obj[item])}
-                  </div>
-                </div>
+                <FolderCard
+                  type={type}
+                  folderName={item}
+                  folderPath={obj[item].folderPath}
+                  folderClicked={folderClicked}
+                  // Recursion call
+                  subFolders={renderMenu(obj[item])}
+                />
               );
             }
           })}
@@ -73,9 +102,5 @@ export default function CourseMenu({ videos, selectVideo }) {
       );
   };
 
-  return (
-    <div style={{ width: "300px", textAlign: "left" }}>
-      {rednerMenu(foldersObj)}
-    </div>
-  );
+  return <div className="course-menu">{menu}</div>;
 }

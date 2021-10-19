@@ -91,6 +91,58 @@ p {
   color: rgb(165, 0, 0);
 }
 
+/* Course menu */
+
+.course-menu {
+  text-align: left;
+  width: 300px;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+/* scrollbar style */
+
+.course-menu::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background-color: #282c34;
+}
+
+.course-menu::-webkit-scrollbar {
+  width: 7px;
+  background-color: #282c34;
+}
+
+.course-menu::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #5a6375;
+}
+
+/* Folder card */
+
+.folder-card svg {
+  font-size: 16px;
+}
+
+.folder-card .folder-name {
+  margin-left: 3px;
+}
+
+.folder-card .sub-folders {
+  padding-left: 20px;
+}
+
+/* Video card */
+
+.video-card {
+  color: lightblue;
+  cursor: pointer;
+}
+
+.video-card svg {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
 /* Admin */
 
 .admin-container {

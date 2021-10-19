@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
-import AdminCourseMenu from "./AdminCourseMenu";
+import CourseMenu from "../components/CourseMenu";
 import UploadBox from "./UploadBox";
 
 export default function AdminCourse() {
@@ -43,7 +43,7 @@ export default function AdminCourse() {
     console.log(video);
   };
 
-  const folderClicked = (folderPath) => {
+  const folderClicked = (e, folderPath) => {
     console.log(folderPath);
     setSelectedFolder(folderPath);
   };
@@ -79,7 +79,8 @@ export default function AdminCourse() {
         justifyContent: "space-between",
       }}
     >
-      <AdminCourseMenu
+      <CourseMenu
+        type="admin"
         course={course}
         videos={videos}
         videoClicked={videoClicked}

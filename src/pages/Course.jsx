@@ -2,8 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router";
 import { serverURL } from "../utils/utils";
 import { GlobalContext } from "../context/GlobalContext";
-import axios from "axios";
 import CourseMenu from "../components/CourseMenu";
+import axios from "axios";
 
 export default function Course() {
   const { courseId } = useParams();
@@ -44,9 +44,16 @@ export default function Course() {
     }
   };
 
-  const selectVideo = (video) => {
+  const videoClicked = (video) => {
     setSelectedPath(video.path);
     setSelectedName(video.name);
+  };
+
+  const folderClicked = (e, folderPath) => {
+    if (e.target) {
+      e.target.parentElement.nextSibling.classList.toggle("hidden");
+    }
+    console.log(folderPath);
   };
 
   return (
@@ -60,14 +67,22 @@ export default function Course() {
         style={{
           display: "flex",
           gap: "200px",
+          alignItems: "flex-start",
         }}
       >
         <video
-          width="800px"
+          // width="800px"
+          height="400px"
           src={`${serverURL()}/api/courses/video?name=${selectedPath}`}
           controls
         />
-        <CourseMenu videos={videos} selectVideo={selectVideo} />
+
+        <CourseMenu
+          course={course}
+          videos={videos}
+          videoClicked={videoClicked}
+          folderClicked={folderClicked}
+        />
       </div>
     </div>
   );
