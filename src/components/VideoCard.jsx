@@ -10,10 +10,7 @@ export default function AdminVideoCard({
   return (
     <div className="video-card">
       {type === "admin" && (
-        <FaTrash
-          onClick={() => deleteVideoClicked(videoData)}
-          style={{ color: "red" }}
-        />
+        <FaTrash onClick={() => deleteVideoClicked(videoData)} />
       )}
 
       <span onClick={() => videoClicked(videoData)}> {videoData.name}</span>
