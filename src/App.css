@@ -95,7 +95,7 @@ p {
 
 .course-menu {
   text-align: left;
-  width: 300px;
+  width: 400px;
   height: 500px;
   overflow-y: scroll;
 }
@@ -119,8 +119,27 @@ p {
 
 /* Folder card */
 
+.folder-card {
+}
+
+.folder-card .name-box {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  /* justify-content: space-between; */
+}
+
+.folder-card .options {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-right: 40px;
+}
+
 .folder-card svg {
   font-size: 16px;
+  cursor: pointer;
 }
 
 .folder-card .folder-name {
@@ -129,6 +148,13 @@ p {
 
 .folder-card .sub-folders {
   padding-left: 20px;
+}
+
+.folder-card .new-folder-input {
+  background: transparent;
+  font-size: 16px;
+  color: white;
+  border: none;
 }
 
 /* Video card */

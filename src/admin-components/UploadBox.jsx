@@ -44,7 +44,7 @@ export default function UploadBox({ selectedFolder, getData }) {
   };
 
   return (
-    <div style={{ width: "50vw" }}>
+    <div style={{ width: "400px" }}>
       <div
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}

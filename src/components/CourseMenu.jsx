@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import VideoCard from "./VideoCard";
 import FolderCard from "./FolderCard";
 
-export default function AdminCourseMenu({
+export default function CourseMenu({
   type,
   course,
   videos,
@@ -13,7 +13,7 @@ export default function AdminCourseMenu({
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    folderClicked(course.courseid + "/" + course.name);
+    folderClicked(undefined, course.courseid + "/" + course.name);
   }, [course]);
 
   useEffect(() => {

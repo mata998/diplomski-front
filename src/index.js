@@ -7,13 +7,13 @@ import { GlobalProvider } from "./context/GlobalContext.js";
 import { HashRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <GlobalProvider>
-      <Router>
-        <App />
-      </Router>
-    </GlobalProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <GlobalProvider>
+    <Router>
+      <App />
+    </Router>
+  </GlobalProvider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 
