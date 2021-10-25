@@ -57,6 +57,8 @@ export default function FolderCard({
 
       setNewFolders((oldFolders) => [...oldFolders, folder]);
 
+      folderClicked(`${folderPath}/${inputValue}`);
+
       setInputValue("");
       setAddFolder(false);
     }
