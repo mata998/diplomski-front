@@ -49,9 +49,11 @@ export default function Course() {
     setSelectedName(video.name);
   };
 
-  const folderClicked = (e, folderPath) => {
-    if (e.target) {
-      e.target.parentElement.nextSibling.classList.toggle("hidden");
+  const folderClicked = (folderPath, e) => {
+    if (e && e.target) {
+      e.target.parentElement.parentElement.nextSibling.classList.toggle(
+        "hidden"
+      );
     }
     console.log(folderPath);
   };

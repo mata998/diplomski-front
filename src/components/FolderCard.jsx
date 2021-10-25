@@ -76,7 +76,7 @@ export default function FolderCard({
           )}
           <span
             className="folder-name"
-            onClick={(e) => folderClicked(e, folderPath)}
+            onClick={(e) => folderClicked(folderPath, e)}
           >
             {folderName}
           </span>

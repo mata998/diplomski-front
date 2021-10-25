@@ -43,7 +43,7 @@ export default function AdminCourse() {
     console.log(video);
   };
 
-  const folderClicked = (e, folderPath) => {
+  const folderClicked = (folderPath, e) => {
     console.log(folderPath);
     setSelectedFolder(folderPath);
   };

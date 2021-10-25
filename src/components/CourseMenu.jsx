@@ -14,7 +14,7 @@ export default function CourseMenu({
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    folderClicked(undefined, course.courseid + "/" + course.name);
+    folderClicked(course.courseid + "/" + course.name);
   }, [course]);
 
   useEffect(() => {
@@ -30,10 +30,6 @@ export default function CourseMenu({
 
   const parseInput = (videos) => {
     const splitPath = videos[0].path.split("/");
-
-    // if first path is: "1/Java/1) Uvod"
-    // selected folder should be "1/Java"
-    // folderClicked(splitPath[0] + "/" + splitPath[1]);
 
     // if first path is: "1/Java/1) Uvod"
     // pathStart should be "1"
