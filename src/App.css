@@ -119,9 +119,6 @@ p {
 
 /* Folder card */
 
-.folder-card {
-}
-
 .folder-card .name-box {
   display: flex;
   align-items: center;
@@ -144,6 +141,7 @@ p {
 
 .folder-card .folder-name {
   margin-left: 3px;
+  cursor: pointer;
 }
 
 .folder-card .sub-folders {

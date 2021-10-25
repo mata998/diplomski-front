@@ -71,6 +71,27 @@ export default function AdminCourse() {
     }
   };
 
+  const deleteFolderClicked = async (folderName, folderPath) => {
+    const answer = window.confirm(`Delete folder ${folderName}?`);
+
+    if (answer === false) {
+      return;
+    }
+
+    const res = await axios.delete(
+      `${serverURL()}/api/admin/folder?path=${folderPath}`,
+      { withCredentials: true }
+    );
+
+    if (res.data.success) {
+      console.log(res.data);
+      getData();
+    } else {
+      console.log(res);
+      alert("Error folder was not deleted");
+    }
+  };
+
   return (
     <div
       className="admin-container"
@@ -86,6 +107,7 @@ export default function AdminCourse() {
         videoClicked={videoClicked}
         folderClicked={folderClicked}
         deleteVideoClicked={deleteVideoClicked}
+        deleteFolderClicked={deleteFolderClicked}
       />
       <div>
         <div>Folder: {selectedFolder}</div>

@@ -9,6 +9,7 @@ export default function CourseMenu({
   videoClicked,
   folderClicked,
   deleteVideoClicked,
+  deleteFolderClicked,
 }) {
   const [menu, setMenu] = useState([]);
 
@@ -92,6 +93,7 @@ export default function CourseMenu({
                   folderName={item}
                   folderPath={obj[item].folderPath}
                   folderClicked={folderClicked}
+                  deleteFolderClicked={deleteFolderClicked}
                   // Recursion call
                   subFolders={renderMenu(obj[item])}
                 />

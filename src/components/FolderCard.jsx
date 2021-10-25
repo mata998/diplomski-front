@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { VscTriangleDown, VscTriangleRight } from "react-icons/vsc";
 import { FaTrash, FaPlus } from "react-icons/fa";
+import axios from "axios";
+import { serverURL } from "../utils/utils";
 
 export default function FolderCard({
   type,
   folderName,
   folderPath,
   folderClicked,
+  deleteFolderClicked,
   subFolders,
 }) {
   const [opened, setOpened] = useState(true);
@@ -46,6 +49,7 @@ export default function FolderCard({
           folderName={inputValue}
           folderPath={`${folderPath}/${inputValue}`}
           folderClicked={folderClicked}
+          deleteFolderClicked={deleteFolderClicked}
           // Recursion call
           subFolders={<></>}
         />
@@ -77,11 +81,15 @@ export default function FolderCard({
             {folderName}
           </span>
         </div>
-        <div className="options">
-          {/* <span>+</span> */}
-          <FaPlus onClick={newFolderClick} />
-          <FaTrash />
-        </div>
+        {type === "admin" && (
+          <div className="options">
+            {/* <span>+</span> */}
+            <FaPlus onClick={newFolderClick} />
+            <FaTrash
+              onClick={() => deleteFolderClicked(folderName, folderPath)}
+            />
+          </div>
+        )}
       </div>
 
       <div className={`sub-folders ${opened ? "" : "hidden"}`}>
