@@ -15,12 +15,10 @@ export default function Course() {
   const history = useHistory();
 
   useEffect(() => {
-    if (!loggedIn) {
-      history.push("/");
+    if (loggedIn) {
+      getData();
     }
-
-    getData();
-  }, []);
+  }, [loggedIn]);
 
   const getData = async () => {
     let res = await axios.get(`${serverURL()}/api/courses/info/${courseId}`);
@@ -59,33 +57,37 @@ export default function Course() {
   };
 
   return (
-    <div>
-      <h1>{course.name}</h1>
-      <br />
+    <>
+      {loggedIn && (
+        <div>
+          <h1>{course.name}</h1>
+          <br />
 
-      <h5 style={{ textAlign: "left" }}>{selectedName}</h5>
-      <br />
-      <div
-        style={{
-          display: "flex",
-          gap: "200px",
-          alignItems: "flex-start",
-        }}
-      >
-        <video
-          // width="800px"
-          height="400px"
-          src={`${serverURL()}/api/courses/video?name=${selectedPath}`}
-          controls
-        />
+          <h5 style={{ textAlign: "left" }}>{selectedName}</h5>
+          <br />
+          <div
+            style={{
+              display: "flex",
+              gap: "200px",
+              alignItems: "flex-start",
+            }}
+          >
+            <video
+              // width="800px"
+              height="400px"
+              src={`${serverURL()}/api/courses/video?name=${selectedPath}`}
+              controls
+            />
 
-        <CourseMenu
-          course={course}
-          videos={videos}
-          videoClicked={videoClicked}
-          folderClicked={folderClicked}
-        />
-      </div>
-    </div>
+            <CourseMenu
+              course={course}
+              videos={videos}
+              videoClicked={videoClicked}
+              folderClicked={folderClicked}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

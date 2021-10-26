@@ -11,12 +11,10 @@ export default function MyCourses() {
   const history = useHistory();
 
   useEffect(() => {
-    if (!loggedIn) {
-      history.push("/");
+    if (loggedIn) {
+      getData();
     }
-
-    getData();
-  }, []);
+  }, [loggedIn]);
 
   const getData = async () => {
     const res = await axios.get(`${serverURL()}/api/courses/unlocked`, {
@@ -32,18 +30,22 @@ export default function MyCourses() {
   };
 
   return (
-    <div>
-      <h3>My courses</h3>
-      <br />
-      {myCourses.map((course) => (
-        <h5
-          key={course.courseid}
-          style={{ padding: "10px 0", cursor: "pointer" }}
-          onClick={() => history.push(`/course/${course.courseid}`)}
-        >
-          {course.name}
-        </h5>
-      ))}
-    </div>
+    <>
+      {loggedIn && (
+        <div>
+          <h3>My courses</h3>
+          <br />
+          {myCourses.map((course) => (
+            <h5
+              key={course.courseid}
+              style={{ padding: "10px 0", cursor: "pointer" }}
+              onClick={() => history.push(`/course/${course.courseid}`)}
+            >
+              {course.name}
+            </h5>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

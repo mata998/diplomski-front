@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
+import { GlobalContext } from "../context/GlobalContext";
 
 export default function AdminAllUsers() {
+  const { loggedIn } = useContext(GlobalContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    getData();
+    if (loggedIn) {
+      getData();
+    }
   }, []);
 
   const getData = async () => {

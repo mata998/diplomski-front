@@ -75,6 +75,7 @@ export default function CourseMenu({
               // Video card component
               return (
                 <VideoCard
+                  key={obj[item].data.videoid}
                   type={type}
                   videoData={obj[item].data}
                   videoClicked={videoClicked}
@@ -85,6 +86,7 @@ export default function CourseMenu({
               // Folder card component
               return (
                 <FolderCard
+                  key={obj[item].folderPath}
                   type={type}
                   folderName={item}
                   folderPath={obj[item].folderPath}

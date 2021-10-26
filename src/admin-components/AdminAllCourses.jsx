@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
+import { GlobalContext } from "../context/GlobalContext";
 
 export default function AdminAllCourses() {
+  const { loggedIn } = useContext(GlobalContext);
   const [courses, setCourses] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    getData();
+    if (loggedIn) {
+      getData();
+    }
   }, []);
 
   const getData = async () => {

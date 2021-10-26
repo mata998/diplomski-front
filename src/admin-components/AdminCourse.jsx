@@ -1,18 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { serverURL } from "../utils/utils";
 import CourseMenu from "../components/CourseMenu";
 import UploadBox from "./UploadBox";
+import { GlobalContext } from "../context/GlobalContext";
 
 export default function AdminCourse() {
+  const { loggedIn } = useContext(GlobalContext);
   const { courseId } = useParams();
   const [course, setCourse] = useState({});
   const [videos, setVideos] = useState([]);
   const [selectedFolder, setSelectedFolder] = useState("");
 
   useEffect(() => {
-    getData();
+    if (loggedIn) {
+      getData();
+    }
   }, []);
 
   const getData = async () => {

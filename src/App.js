@@ -2,7 +2,7 @@
 import "./App.css";
 
 import { useState, useEffect, useContext } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import { GlobalContext } from "./context/GlobalContext.js";
 
 import { initializeApp } from "firebase/app";
@@ -31,6 +31,7 @@ function App() {
   const history = useHistory();
   const [uid, setUid] = useState("");
   const [mail, setMail] = useState("Na stranicu dodjite klikom na Login");
+  const location = useLocation();
 
   const firebaseConfig = {
     apiKey: "AIzaSyDRlKpi-tU5xOl_O5rYEIh815540FPCvBw",
@@ -46,27 +47,33 @@ function App() {
     if (!loggedIn) {
       initializeApp(firebaseConfig);
 
-      const auth = getAuth();
+      const loginToken = localStorage.getItem("loginToken");
 
-      getRedirectResult(auth)
-        .then((result) => {
-          const user = result.user;
-          console.log(user);
+      if (loginToken) {
+        login("autologin", { loginToken });
+      } else {
+        const auth = getAuth();
 
-          login(user);
-        })
-        .catch((error) => {
-          // Handle Errors here.
-          new Cookies().remove("token");
+        getRedirectResult(auth)
+          .then((result) => {
+            const user = result.user;
+            console.log(user);
 
-          console.log("error u redirectu");
-          console.log(error);
-        });
+            login("login", { user });
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            new Cookies().remove("token");
+
+            console.log("error u redirectu");
+            console.log(error);
+          });
+      }
     }
   }, [registered]);
 
   useEffect(() => {
-    if (user.role === "admin") {
+    if (user.role === "admin" && location.pathname === "/") {
       history.push("/admin/courses");
     }
   }, [user]);
@@ -78,21 +85,41 @@ function App() {
     signInWithRedirect(auth, provider);
   };
 
-  const login = async (user) => {
-    const loginData = {
-      userId: user.uid,
-      fingerprint: JSON.stringify(getFingerprint()),
-    };
+  const login = async (type, payload) => {
+    let { user, loginToken } = payload;
 
-    const res = await axios.post(`${serverURL()}/api/login`, loginData);
+    let res;
+
+    if (type === "autologin") {
+      const loginData = {
+        loginToken,
+        fingerprint: JSON.stringify(getFingerprint()),
+      };
+
+      res = await axios.post(`${serverURL()}/api/login/autologin`, loginData);
+    }
+
+    if (type === "login") {
+      const loginData = {
+        userId: user.uid,
+        fingerprint: JSON.stringify(getFingerprint()),
+      };
+
+      res = await axios.post(`${serverURL()}/api/login`, loginData);
+    }
 
     // login
     if (res.data.case === "login") {
       const userInfo = res.data.data;
 
+      // token in cookie
       new Cookies().set("token", userInfo.token);
       console.log(userInfo);
 
+      // loginToken in localStorage
+      localStorage.setItem("loginToken", userInfo.loginToken);
+
+      // global state
       setUser(userInfo);
       setLoggedIn(true);
 
@@ -120,11 +147,20 @@ function App() {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const loginToken = localStorage.getItem("loginToken");
+
+    const res = await axios.post(`${serverURL()}/api/login/logout`, {
+      loginToken,
+    });
+
     new Cookies().remove("token");
+    localStorage.removeItem("loginToken");
+
     setUser({});
     setLoggedIn(false);
     setRegistered(false);
+
     history.push("/");
   };
 
