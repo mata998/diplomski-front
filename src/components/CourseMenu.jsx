@@ -22,7 +22,9 @@ export default function CourseMenu({
       videoClicked(videos[0]);
       const foldersObj = parseInput(videos);
       console.log(foldersObj);
-      setMenu(renderMenu(foldersObj));
+      const renderedMenu = renderMenu(foldersObj);
+      // console.log(renderedMenu);
+      setMenu(renderedMenu);
     } else {
       setMenu([]);
     }
@@ -69,7 +71,8 @@ export default function CourseMenu({
         <>
           {Object.keys(obj).map((item) => {
             // skip folderPath property
-            if (item === "folderPath") return <></>;
+            if (item === "folderPath")
+              return <React.Fragment key={Math.random()} />;
 
             if (obj[item].data) {
               // Video card component
