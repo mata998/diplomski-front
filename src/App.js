@@ -143,17 +143,12 @@ function App() {
     // error
     else {
       new Cookies().remove("token");
+      localStorage.removeItem("loginToken");
       console.log(res);
     }
   };
 
   const logout = async () => {
-    const loginToken = localStorage.getItem("loginToken");
-
-    const res = await axios.post(`${serverURL()}/api/login/logout`, {
-      loginToken,
-    });
-
     new Cookies().remove("token");
     localStorage.removeItem("loginToken");
 
