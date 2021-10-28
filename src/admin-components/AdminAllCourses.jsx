@@ -49,42 +49,31 @@ export default function AdminAllCourses() {
   };
 
   return (
-    <div className="admin-container">
+    <div className="all-courses">
       <h4>All courses</h4>
 
       <br />
 
       <div>
         {courses.map((course) => (
-          <div
-            key={course.courseid}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "20vw",
-            }}
-          >
+          <div key={course.courseid} className="course">
             <div
-              style={{ cursor: "pointer" }}
+              className="course-name"
               onClick={() => history.push(`/admin/course/${course.courseid}`)}
             >
               {course.name}
             </div>
-            <div
-              style={{ color: "rgb(255, 176, 176)", cursor: "pointer" }}
-              onClick={() => deleteCourse(course)}
-            >
+
+            <div className="delete-btn" onClick={() => deleteCourse(course)}>
               Delete
             </div>
           </div>
         ))}
         <div
-          style={{
-            marginTop: "35px",
-            cursor: "pointer",
-          }}
+          className="new-course"
+          onClick={() => history.push("/admin/create-course")}
         >
-          <Link to="/admin/create-course">+ New course</Link>
+          + New course
         </div>
       </div>
     </div>

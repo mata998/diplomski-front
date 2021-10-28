@@ -32,17 +32,17 @@ export default function MyCourses() {
   return (
     <>
       {loggedIn && (
-        <div>
+        <div className="my-courses">
           <h3>My courses</h3>
           <br />
           {myCourses.map((course) => (
-            <h5
+            <div
               key={course.courseid}
-              style={{ padding: "10px 0", cursor: "pointer" }}
+              className="course"
               onClick={() => history.push(`/course/${course.courseid}`)}
             >
               {course.name}
-            </h5>
+            </div>
           ))}
         </div>
       )}

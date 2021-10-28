@@ -43,26 +43,18 @@ export default function AdminAllUsers() {
   };
 
   return (
-    <div className="admin-container">
-      <div>All users</div>
+    <div className="all-users">
+      <h4>All users</h4>
 
       <br />
 
-      <div style={{ width: "40vw" }}>
+      <div>
         {users.map((user) => (
-          <div
-            style={{ display: "flex", justifyContent: "space-between" }}
-            key={user.userid}
-          >
-            <div>{user.name}</div>
+          <div className="user" key={user.userid}>
+            <div className="user-name">{user.name}</div>
 
-            <div style={{ display: "flex", gap: "20px" }}>
-              <div
-                style={{ color: "rgb(255, 176, 176)", cursor: "pointer" }}
-                onClick={() => deleteUser(user)}
-              >
-                Delete
-              </div>
+            <div className="delete-btn" onClick={() => deleteUser(user)}>
+              Delete
             </div>
           </div>
         ))}

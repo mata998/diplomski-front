@@ -53,13 +53,13 @@ export default function AdminRequests() {
             <div className="user-name"> {request.username}</div>
             <div className="btn-container">
               <div
-                className="approve "
+                className="approve"
                 onClick={(e) => approveClick(e, request)}
               >
                 approve
               </div>
               <div
-                className="decline "
+                className="decline"
                 onClick={(e) => declineClick(e, request)}
               >
                 decline

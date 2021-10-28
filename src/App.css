@@ -5,6 +5,14 @@ a {
 
 input {
   padding: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  font-size: 16px;
+  padding: 5px;
+  display: block;
+  resize: none;
 }
 
 p {
@@ -45,9 +53,22 @@ p {
 .course-card {
   text-align: left;
   width: 35vw;
+  height: 170px;
+
   padding: 20px;
   margin: 15px 0;
   border: 1px solid white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card .container {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .course-card .title {
@@ -58,24 +79,18 @@ p {
   color: rgb(211, 211, 211);
 }
 
-.course-card .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-}
-
 .course-card .request {
   font-size: 20px;
   border: 1px solid white;
   border-radius: 7px;
   padding: 5px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
+  align-self: center;
 }
 
 .course-card .request:hover {
-  transform: scale(1.1);
+  transform: scale(1.07);
 }
 
 .course-card .owned {
@@ -150,7 +165,6 @@ p {
 
 .folder-card .new-folder-input {
   background: transparent;
-  font-size: 16px;
   color: white;
   border: none;
 }
@@ -168,19 +182,27 @@ p {
   color: rgb(243, 71, 71);
 }
 
+/* My courses */
+
+.my-courses {
+  width: max-content;
+}
+
+.my-courses .course {
+  padding: 20px 30px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+}
+
+.my-courses .course:hover {
+  background-color: #2e323b;
+}
+
 /* Admin */
 
 .admin-container {
   width: 80vw;
   text-align: left;
-}
-
-/* Admin create course */
-
-.create-course textarea {
-  padding: 5px;
-  display: block;
-  resize: none;
 }
 
 /* Admin all requests */
@@ -217,6 +239,8 @@ p {
   display: flex;
   align-items: center;
   gap: 30px;
+
+  margin-right: 5px;
 }
 
 .all-requests .approve,
@@ -226,6 +250,12 @@ p {
   border: 1px solid;
   border-radius: 7px;
   padding: 5px;
+  transition: 0.2s;
+}
+
+.all-requests .approve:hover,
+.all-requests .decline:hover {
+  transform: scale(1.07);
 }
 
 .all-requests .approve {
@@ -250,6 +280,113 @@ p {
 }
 
 /* Admin all courses */
+
+.all-courses {
+  width: 650px;
+  text-align: left;
+}
+
+.all-courses .course {
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid white;
+}
+
+.all-courses .course:hover {
+  background-color: #2e323b;
+}
+
+.all-courses .course-name {
+  padding: 20px 0;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.all-courses .delete-btn {
+  color: rgb(255, 176, 176);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.all-courses .delete-btn:hover {
+  color: rgb(255, 50, 50);
+}
+
+.all-courses .new-course {
+  padding: 35px 0;
+  cursor: pointer;
+}
+
+.all-courses .new-course:hover {
+  background-color: #2e323b;
+}
+
+/* Admin all users */
+
+.all-users {
+  width: 650px;
+  text-align: left;
+}
+
+.all-users .user {
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid white;
+}
+
+.all-users .user:hover {
+  background-color: #2e323b;
+}
+
+.all-users .user-name {
+  padding: 20px 0;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.all-users .delete-btn {
+  color: rgb(255, 176, 176);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.all-users .delete-btn:hover {
+  color: rgb(255, 50, 50);
+}
+
+/* Admin create course */
+
+.create-course {
+  /* width: 650px; */
+  /* text-align: left; */
+}
+
+.create-course input,
+.create-course textarea {
+  margin-top: 7px;
+  width: 300px;
+}
+
+.create-course .create-btn {
+  font-size: 20px;
+  color: rgb(0, 207, 0);
+  cursor: pointer;
+  border: 2px solid;
+  border-radius: 7px;
+  padding: 5px;
+  transition: 0.2s;
+  width: fit-content;
+
+  display: block;
+  margin: 0 auto;
+}
+
+.create-course .create-btn:hover {
+  transform: scale(1.07);
+  color: rgb(0, 255, 13);
+}
 
 /* NA KRAJU */
 .hidden {

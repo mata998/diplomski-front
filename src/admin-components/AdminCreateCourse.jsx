@@ -35,7 +35,7 @@ export default function AdminCreateCourse() {
   };
 
   return (
-    <div className="admin-container create-course">
+    <div className="create-course">
       <h4>Create course</h4>
 
       <br />
@@ -50,9 +50,9 @@ export default function AdminCreateCourse() {
       <br />
       <br />
 
-      <div>Description</div>
+      <div>Description:</div>
       <textarea
-        cols="30"
+        // cols="30"
         rows="5"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
@@ -60,9 +60,9 @@ export default function AdminCreateCourse() {
 
       <br />
 
-      <button style={{ padding: "15px" }} onClick={createCourse}>
+      <div className="create-btn" onClick={createCourse}>
         Create
-      </button>
+      </div>
     </div>
   );
 }

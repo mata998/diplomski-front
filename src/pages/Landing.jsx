@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { serverURL } from "../utils/utils";
+import { serverURL, shortenString } from "../utils/utils";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function Landing() {
@@ -81,10 +81,8 @@ export default function Landing() {
           <div className="course-card" key={course.courseid}>
             <div className="title">{course.name}</div>
             <div className="container">
-              <p className="desc">
-                {course.description} Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Sed
-              </p>
+              <p className="desc">{shortenString(course.description, 180)}</p>
+
               {loggedIn && courseType(course)}
             </div>
           </div>
