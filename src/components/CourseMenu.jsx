@@ -12,6 +12,7 @@ export default function CourseMenu({
   deleteFolderClicked,
 }) {
   const [menu, setMenu] = useState([]);
+  const depth = 2;
 
   useEffect(() => {
     folderClicked(course.courseid + "/" + course.name);
@@ -34,16 +35,24 @@ export default function CourseMenu({
     const splitPath = videos[0].path.split("/");
 
     // if first path is: "1/Java/1) Uvod"
+    // depth = 1
     // pathStart should be "1"
-    const pathStart = splitPath[0];
+    // depth = 2
+    // pathstart should be "1/Java"
+    let pathStart = "";
+    for (let i = 0; i < depth; i++) {
+      pathStart += `/${splitPath[i]}`;
+    }
+    // remove first /
+    pathStart = pathStart.slice(1);
 
     const parsedRes = { folderPath: pathStart };
 
     videos.forEach((video) => {
       const pathsArr = video.path.split("/");
 
-      // start at 2 if we want to skip first 2 folders: "1" and "Java"
-      addVideoRek(parsedRes, pathsArr, 1, video);
+      // depth is 2 if we want to skip first 2 folders: "1" and "Java"
+      addVideoRek(parsedRes, pathsArr, depth, video);
     });
 
     return parsedRes;
@@ -105,5 +114,16 @@ export default function CourseMenu({
       );
   };
 
-  return <div className="course-menu">{menu}</div>;
+  return (
+    <div className="course-menu">
+      <h3
+        onClick={() => folderClicked(course.courseid + "/" + course.name)}
+        className="course-name"
+      >
+        {course.name}
+      </h3>
+
+      {menu}
+    </div>
+  );
 }

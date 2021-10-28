@@ -81,7 +81,7 @@ export default function Landing() {
           <div className="course-card" key={course.courseid}>
             <div className="title">{course.name}</div>
             <div className="container">
-              <p className="desc">{shortenString(course.description, 180)}</p>
+              <p className="desc">{shortenString(course.description, 150)}</p>
 
               {loggedIn && courseType(course)}
             </div>

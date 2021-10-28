@@ -21,9 +21,8 @@ export default function UploadBox({ selectedFolder, getData }) {
       formData.append("files", file);
       // formData.append("paths", file.fullPath);
       formData.append("paths", `${selectedFolder}/${file.fullPath}`);
+      console.log(`${selectedFolder}/${file.fullPath}`);
     });
-
-    // formData.append("selectedFolder", selectedFolder);
 
     try {
       const res = await axios.post(

@@ -47,7 +47,7 @@ export default function AdminCourse() {
     console.log(video);
   };
 
-  const folderClicked = (folderPath, e) => {
+  const folderClicked = (folderPath, toggleOpen) => {
     console.log(folderPath);
     setSelectedFolder(folderPath);
   };
@@ -97,13 +97,7 @@ export default function AdminCourse() {
   };
 
   return (
-    <div
-      className="admin-container"
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
+    <div className="admin-course">
       <CourseMenu
         type="admin"
         course={course}

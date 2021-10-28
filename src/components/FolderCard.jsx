@@ -6,13 +6,14 @@ import { serverURL } from "../utils/utils";
 
 export default function FolderCard({
   type,
+  isOpened = false,
   folderName,
   folderPath,
   folderClicked,
   deleteFolderClicked,
   subFolders,
 }) {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(isOpened);
   const [addFolder, setAddFolder] = useState(false);
   const [newFolders, setNewFolders] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -33,6 +34,7 @@ export default function FolderCard({
   };
 
   const newFolderClick = () => {
+    setOpened(true);
     setAddFolder(true);
   };
 
@@ -45,6 +47,7 @@ export default function FolderCard({
     if (e.key === "Enter") {
       const folder = (
         <FolderCard
+          key={`${folderPath}/${inputValue}`}
           type={type}
           folderName={inputValue}
           folderPath={`${folderPath}/${inputValue}`}
@@ -78,7 +81,7 @@ export default function FolderCard({
           )}
           <span
             className="folder-name"
-            onClick={(e) => folderClicked(folderPath, e)}
+            onClick={(e) => folderClicked(folderPath, toggleOpen)}
           >
             {folderName}
           </span>

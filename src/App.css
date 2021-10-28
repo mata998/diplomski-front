@@ -108,6 +108,13 @@ p {
 
 /* Course menu */
 
+.course-menu .course-name {
+  padding: 10px 0;
+  border-bottom: 1px solid white;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
 .course-menu {
   text-align: left;
   width: 400px;
@@ -138,7 +145,6 @@ p {
   display: flex;
   align-items: center;
   gap: 40px;
-  /* justify-content: space-between; */
 }
 
 .folder-card .options {
@@ -342,7 +348,6 @@ p {
 
 .all-users .user-name {
   padding: 20px 0;
-  cursor: pointer;
   flex-grow: 1;
 }
 
@@ -357,11 +362,6 @@ p {
 }
 
 /* Admin create course */
-
-.create-course {
-  /* width: 650px; */
-  /* text-align: left; */
-}
 
 .create-course input,
 .create-course textarea {
@@ -386,6 +386,16 @@ p {
 .create-course .create-btn:hover {
   transform: scale(1.07);
   color: rgb(0, 255, 13);
+}
+
+/* Admin course */
+
+.admin-course {
+  width: 80vw;
+  text-align: left;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 /* NA KRAJU */
