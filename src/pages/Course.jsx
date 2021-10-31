@@ -71,8 +71,8 @@ export default function Course() {
             }}
           >
             <video
-              // width="800px"
-              height="400px"
+              width="650px"
+              // height="365px"
               src={`${serverURL()}/api/courses/video?name=${selectedPath}`}
               controls
             />

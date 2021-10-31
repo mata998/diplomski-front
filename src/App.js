@@ -44,32 +44,29 @@ function App() {
   };
 
   useEffect(() => {
-    if (!loggedIn) {
-      initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
-      const loginToken = localStorage.getItem("loginToken");
+    const auth = getAuth();
 
-      if (loginToken) {
-        login("autologin", { loginToken });
-      } else {
-        const auth = getAuth();
+    getRedirectResult(auth)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
 
-        getRedirectResult(auth)
-          .then((result) => {
-            const user = result.user;
-            console.log(user);
+        login("login", { user });
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        new Cookies().remove("token");
 
-            login("login", { user });
-          })
-          .catch((error) => {
-            // Handle Errors here.
-            new Cookies().remove("token");
+        console.log("error u redirectu");
+        console.log(error);
 
-            console.log("error u redirectu");
-            console.log(error);
-          });
-      }
-    }
+        const loginToken = localStorage.getItem("loginToken");
+        if (loginToken) {
+          login("autologin", { loginToken });
+        }
+      });
   }, [registered]);
 
   useEffect(() => {
@@ -154,7 +151,6 @@ function App() {
 
     setUser({});
     setLoggedIn(false);
-    setRegistered(false);
 
     history.push("/");
   };

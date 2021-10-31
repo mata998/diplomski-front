@@ -52,7 +52,7 @@ p {
 
 .course-card {
   text-align: left;
-  width: 35vw;
+  width: 500px;
   height: 170px;
 
   padding: 20px;
@@ -118,7 +118,7 @@ p {
 .course-menu {
   text-align: left;
   width: 400px;
-  height: 500px;
+  height: 450px;
   overflow-y: scroll;
 }
 
