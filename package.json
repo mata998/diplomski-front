@@ -22,8 +22,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dbuild": "react-scripts build && rm -r ../diplomski-back/build && cp -r build ../diplomski-back/build",
-    "fullbuild": "npm run dbuild && cd ../diplomski-back && npm run dbuild"
+    "dbuild": "docker image build -t mata998/diplomski-front-prod . && docker image push mata998/diplomski-front-prod",
+    "fullbuild": "npm run dbuild && cd ../diplomski-back && npm run dbuild",
+    "prodbuild": "docker image build -t mata998/diplomski-front-prod . && docker run -d -p 5000:80 mata998/diplomski-front-prod",
+    "prodrun": "docker run -d -p 5000:80  mata998/diplomski-front-prod"
   },
   "eslintConfig": {
     "extends": [
