@@ -60,7 +60,7 @@ export default function AdminCreateCourse() {
 
       <br />
 
-      <div className="create-btn" onClick={createCourse}>
+      <div className="btn-round create-btn" onClick={createCourse}>
         Create
       </div>
     </div>

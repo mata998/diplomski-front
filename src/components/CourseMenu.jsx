@@ -123,7 +123,7 @@ export default function CourseMenu({
         {course.name}
       </h3>
 
-      {menu}
+      <div className="scroll">{menu}</div>
     </div>
   );
 }

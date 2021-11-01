@@ -15,6 +15,11 @@ export default function UploadBox({ selectedFolder, getData }) {
   };
 
   const uploadFiles = async () => {
+    if (files.length === 0) {
+      alert("Drag files");
+      return;
+    }
+
     const formData = new FormData();
 
     files.forEach((file) => {
@@ -43,24 +48,29 @@ export default function UploadBox({ selectedFolder, getData }) {
   };
 
   return (
-    <div style={{ width: "400px" }}>
+    <div className="upload-box">
       <div
+        className="drag-here"
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
-        style={{
-          padding: "20px 50px",
-          border: "1px dotted red",
-          textAlign: "center",
-        }}
       >
         Drag here
       </div>
-      <div>
+      <div className="upload-items scroll">
         {files.map((file) => (
-          <div key={file.fullPath}>{file.fullPath}</div>
+          <div className="upload-item" key={file.fullPath}>
+            {file.fullPath}
+          </div>
         ))}
       </div>
-      <button onClick={uploadFiles}>Upload</button>
+      <div className="btn-container">
+        <div className="btn-round" onClick={uploadFiles}>
+          Upload
+        </div>
+        <div className="btn-round" onClick={() => setFiles([])}>
+          Discard
+        </div>
+      </div>
     </div>
   );
 }
