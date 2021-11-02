@@ -34,13 +34,22 @@ p {
   transform: scale(1.025);
 }
 
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-
-  text-align: center;
   min-height: 100vh;
   background-color: #282c34;
   color: white;
@@ -215,7 +224,8 @@ p {
 }
 
 .my-courses .course {
-  padding: 20px 30px;
+  text-align: center;
+  padding: 20px 0;
   border-bottom: 1px solid white;
   cursor: pointer;
 }

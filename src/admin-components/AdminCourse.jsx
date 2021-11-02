@@ -83,7 +83,7 @@ export default function AdminCourse() {
     }
 
     const res = await axios.delete(
-      `${serverURL()}/api/admin/folder?path=${folderPath}`,
+      `${serverURL()}/api/admin/folder?path=${folderPath}/`,
       { withCredentials: true }
     );
 

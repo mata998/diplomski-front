@@ -20,7 +20,7 @@ export default function Register({ uid, mail }) {
       uid: uid,
       name: inputName,
       mail: mail,
-      fingerprint: JSON.stringify(getFingerprint()),
+      fingerprint: getFingerprint(),
     };
 
     const res = await axios.post(`${serverURL()}/api/login/register`, data);
@@ -58,9 +58,9 @@ export default function Register({ uid, mail }) {
 
       <br />
 
-      <button style={{ padding: "15px" }} onClick={register}>
+      <div className="btn-round" onClick={register}>
         Register
-      </button>
+      </div>
     </>
   );
 }

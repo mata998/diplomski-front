@@ -74,7 +74,7 @@ export default function Landing() {
 
   return (
     <div>
-      <h3>All courses</h3>
+      <h3 className="text-align-center">All courses</h3>
       <br />
       <div>
         {courses.map((course) => (

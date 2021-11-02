@@ -1,7 +1,7 @@
 // Css
 import "./App.css";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import { GlobalContext } from "./context/GlobalContext.js";
 
@@ -32,6 +32,7 @@ function App() {
   const [uid, setUid] = useState("");
   const [mail, setMail] = useState("Na stranicu dodjite klikom na Login");
   const location = useLocation();
+  const refreshIntervalId = useRef(null);
 
   const firebaseConfig = {
     apiKey: "AIzaSyDRlKpi-tU5xOl_O5rYEIh815540FPCvBw",
@@ -90,7 +91,7 @@ function App() {
     if (type === "autologin") {
       const loginData = {
         loginToken,
-        fingerprint: JSON.stringify(getFingerprint()),
+        fingerprint: getFingerprint(),
       };
 
       res = await axios.post(`${serverURL()}/api/login/autologin`, loginData);
@@ -99,7 +100,7 @@ function App() {
     if (type === "login") {
       const loginData = {
         userId: user.uid,
-        fingerprint: JSON.stringify(getFingerprint()),
+        fingerprint: getFingerprint(),
       };
 
       res = await axios.post(`${serverURL()}/api/login`, loginData);
@@ -115,6 +116,9 @@ function App() {
 
       // loginToken in localStorage
       localStorage.setItem("loginToken", userInfo.loginToken);
+
+      // start refreshtoken interval
+      refreshTokenStart();
 
       // global state
       setUser(userInfo);
@@ -134,8 +138,12 @@ function App() {
     // bad fingerprint
     else if (res.data.case === "fingerprint") {
       new Cookies().remove("token");
-      alert("Los fingerprint");
+      localStorage.removeItem("loginToken");
+
       console.log("los fingerprint");
+      if (type === "login") {
+        alert("Los fingerprint");
+      }
     }
     // error
     else {
@@ -149,10 +157,43 @@ function App() {
     new Cookies().remove("token");
     localStorage.removeItem("loginToken");
 
+    refreshTokenStop();
+
     setUser({});
     setLoggedIn(false);
 
     history.push("/");
+  };
+
+  const refreshTokenStart = () => {
+    const refreshMinutes = 5;
+
+    const id = setInterval(async () => {
+      const res = await axios.post(
+        `${serverURL()}/api/login/refresh-token`,
+        { fingerprint: getFingerprint() },
+        { withCredentials: true }
+      );
+
+      if (res.data.success) {
+        console.log(res.data);
+
+        new Cookies().set("token", res.data.data);
+      } else {
+        console.log(res.data);
+
+        alert("Refreshing token failed");
+
+        logout();
+      }
+    }, refreshMinutes * 60 * 1000);
+
+    refreshIntervalId.current = id;
+  };
+
+  const refreshTokenStop = () => {
+    clearInterval(refreshIntervalId.current);
+    refreshIntervalId.current = null;
   };
 
   return (

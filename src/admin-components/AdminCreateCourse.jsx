@@ -36,7 +36,7 @@ export default function AdminCreateCourse() {
 
   return (
     <div className="create-course">
-      <h4>Create course</h4>
+      <h4 className="text-align-center">Create course</h4>
 
       <br />
 
