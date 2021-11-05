@@ -94,7 +94,9 @@ function App() {
         fingerprint: getFingerprint(),
       };
 
-      res = await axios.post(`${serverURL()}/api/login/autologin`, loginData);
+      res = await axios.post(`${serverURL()}/api/login/autologin`, loginData, {
+        withCredentials: true,
+      });
     }
 
     if (type === "login") {
@@ -103,16 +105,18 @@ function App() {
         fingerprint: getFingerprint(),
       };
 
-      res = await axios.post(`${serverURL()}/api/login`, loginData);
+      res = await axios.post(`${serverURL()}/api/login`, loginData, {
+        withCredentials: true,
+      });
     }
 
     // login
     if (res.data.case === "login") {
       const userInfo = res.data.data;
+      console.log(userInfo);
 
       // token in cookie
-      new Cookies().set("token", userInfo.token);
-      console.log(userInfo);
+      // new Cookies().set("token", userInfo.token);
 
       // loginToken in localStorage
       localStorage.setItem("loginToken", userInfo.loginToken);
@@ -176,9 +180,9 @@ function App() {
       );
 
       if (res.data.success) {
-        console.log(res.data);
+        console.log(res);
 
-        new Cookies().set("token", res.data.data);
+        // new Cookies().set("token", res.data.data);
       } else {
         console.log(res.data);
 
