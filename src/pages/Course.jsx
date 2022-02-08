@@ -57,19 +57,13 @@ export default function Course() {
   return (
     <>
       {loggedIn && (
-        <div>
+        <div className="course-page">
           <h1>{course.name}</h1>
           <br />
 
           <h5 style={{ textAlign: "left" }}>{selectedName}</h5>
           <br />
-          <div
-            style={{
-              display: "flex",
-              gap: "200px",
-              alignItems: "flex-start",
-            }}
-          >
+          <div className="container">
             <video
               width="650px"
               // height="365px"

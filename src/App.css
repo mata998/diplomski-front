@@ -235,6 +235,18 @@ p {
   background-color: #2e323b;
 }
 
+/* Course */
+
+.course-page .container {
+  display: flex;
+  gap: 200px;
+  align-items: flex-start;
+}
+
+.course-page .container video {
+  transform: translateZ(0);
+}
+
 /* Admin */
 
 .admin-container {
