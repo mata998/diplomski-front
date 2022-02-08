@@ -2,7 +2,7 @@ function serverURL() {
   if (window.location.hostname === "localhost") {
     return "http://localhost:3000";
   } else {
-    return "http://35.198.186.251:3000";
+    return "http://138.3.250.151:3000";
   }
 }
 
