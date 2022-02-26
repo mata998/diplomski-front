@@ -34,6 +34,9 @@ function App() {
   const location = useLocation();
   const refreshIntervalId = useRef(null);
 
+  // obrisi ovo
+  console.log(getFingerprint());
+
   const firebaseConfig = {
     apiKey: "AIzaSyDRlKpi-tU5xOl_O5rYEIh815540FPCvBw",
     authDomain: "diplomski-50bd0.firebaseapp.com",
