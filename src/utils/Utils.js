@@ -1,5 +1,7 @@
 const { UAParser } = require("ua-parser-js");
 
+// wtfff sta je sa ovim fajlom
+
 function serverURL() {
   if (window.location.hostname === "localhost") {
     return "http://localhost:3000";
