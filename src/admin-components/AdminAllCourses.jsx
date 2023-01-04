@@ -35,7 +35,7 @@ export default function AdminAllCourses() {
     }
 
     const res = await axios.delete(
-      `${serverURL()}/api/admin/delete-course/${courseid}`,
+      `${serverURL()}/api/admin/courses/${courseid}`,
       { withCredentials: true }
     );
 

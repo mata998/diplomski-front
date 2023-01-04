@@ -20,7 +20,7 @@ export default function AdminCreateCourse() {
     };
 
     const res = await axios.post(
-      `${serverURL()}/api/admin/create-course`,
+      `${serverURL()}/api/admin/courses`,
       courseData,
       { withCredentials: true }
     );

@@ -105,12 +105,10 @@ export default function AdminRequests() {
   };
 
   const declineClick = async (e, request) => {
-    const res = await axios.post(
-      `${serverURL()}/api/admin/delete-usercourse`,
-      {
-        userId: request.userid,
-        courseId: request.courseid,
-      },
+    const res = await axios.delete(
+      `${serverURL()}/api/admin/usercourse?userId=${request.userid}&courseId=${
+        request.courseid
+      }`,
       {
         withCredentials: true,
       }

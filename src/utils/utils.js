@@ -35,7 +35,6 @@ function getFingerprint() {
 
   const parser = new UAParser();
   const results = parser.getResult();
-  console.log(results);
 
   const fingerprint = {
     gpu: getGPU(),
@@ -53,6 +52,8 @@ function getFingerprint() {
     engine: results.engine.name,
     os: `${results.os.name} ${results.os.version}`,
   };
+
+  console.log(fingerprint);
 
   return fingerprint;
 }

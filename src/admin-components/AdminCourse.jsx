@@ -20,7 +20,7 @@ export default function AdminCourse() {
   }, []);
 
   const getData = async () => {
-    let res = await axios.get(`${serverURL()}/api/courses/info/${courseId}`);
+    let res = await axios.get(`${serverURL()}/api/courses/${courseId}`);
 
     if (res.data.success) {
       console.log(res.data.data);
